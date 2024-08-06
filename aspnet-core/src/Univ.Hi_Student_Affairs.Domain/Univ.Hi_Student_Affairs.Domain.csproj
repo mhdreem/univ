@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Univ.Hi_Student_Affairs</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\Admission\IAdmissionRepository.cs" />
+    <Compile Remove="Domain\Univ\Branch\BranchFilter.cs" />
+    <Compile Remove="Domain\Univ\Branch\BranchManager.cs" />
+    <Compile Remove="Domain\Univ\Branch\Exception\AverageCalcNameAlreadyExistsException.cs" />
+    <Compile Remove="Domain\Univ\Branch\Exception\AverageCalcNotExistsException.cs" />
+    <Compile Remove="Domain\Univ\Collage\Exception\AverageCalcNameAlreadyExistsException.cs" />
+    <Compile Remove="Domain\Univ\Collage\Exception\AverageCalcNotExistsException.cs" />
+    <Compile Remove="Domain\CollType\Exception\AverageCalcNameAlreadyExistsException.cs" />
+    <Compile Remove="Domain\CollType\Exception\AverageCalcNotExistsException.cs" />
+    <Compile Remove="Domain\Univ\Department\Exception\AverageCalcNameAlreadyExistsException.cs" />
+    <Compile Remove="Domain\Univ\Department\Exception\AverageCalcNotExistsException.cs" />
+    <Compile Remove="Domain\Univ\Exception\AverageCalcNameAlreadyExistsException.cs" />
+    <Compile Remove="Domain\Univ\Exception\AverageCalcNotExistsException.cs" />
+    <Compile Remove="Domain\Univ\UnivSection\Exception\AverageCalcNameAlreadyExistsException.cs" />
+    <Compile Remove="Domain\Univ\UnivSection\Exception\AverageCalcNotExistsException.cs" />
+    <Compile Remove="Domain\UnivType\Exception\AverageCalcNameAlreadyExistsException.cs" />
+    <Compile Remove="Domain\UnivType\Exception\AverageCalcNotExistsException.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Univ.Hi_Student_Affairs.Domain.Shared\Univ.Hi_Student_Affairs.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Emailing" Version="8.1.3" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="8.1.3" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="8.1.3" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="8.1.3" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="8.1.3" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="8.1.3" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="8.1.3" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="8.1.3" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Domain" Version="8.1.3" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="8.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\Univ\Branch\Exception\" />
+    <Folder Include="Domain\Univ\Collage\Exception\" />
+    <Folder Include="Domain\Univ\Department\Exception\" />
+    <Folder Include="Domain\Univ\Exception\" />
+    <Folder Include="Domain\Univ\UnivSection\Exception\" />
+    <Folder Include="StdTermination\" />
+  </ItemGroup>
+
+</Project>
