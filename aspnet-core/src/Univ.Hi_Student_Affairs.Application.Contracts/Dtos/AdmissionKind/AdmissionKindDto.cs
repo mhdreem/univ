@@ -16,7 +16,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.AdmissionKind
         public virtual int? Ord { get; set; }
     }
 
-    public class CreateAdmissionKindDto 
+    public class CreateAdmissionKindDto
     {
         [Required]
         [MaxLength(255)]
@@ -45,7 +45,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.AdmissionKind
 
     }
 
-    public class CheckAdmissionKindDto:EntityDto<int?>
+    public class CheckAdmissionKindDto : EntityDto<int?>
     {
         public string? NameAr { get; set; }
 

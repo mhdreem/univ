@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Univ.Hi_Student_Affairs.Dtos.Punishment;
+using Univ.Hi_Student_Affairs.Dtos.DomainPunishment;
 using Volo.Abp.Application.Dtos;
 
 
@@ -22,14 +22,14 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdAbolition
 
 
 
-      
+
         public int? PunishmentId { get; set; }
         public PunishmentDto? Punishment { get; set; }
 
     }
 
 
-    public class CreateStdAbolitionDto 
+    public class CreateStdAbolitionDto
     {
         //رقم قرار لجنة التظلم
         public int? No { get; set; }

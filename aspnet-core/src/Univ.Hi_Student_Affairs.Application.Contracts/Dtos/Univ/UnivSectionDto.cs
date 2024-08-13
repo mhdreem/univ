@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.ObjectModel;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Univ
 {
@@ -27,13 +23,13 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
 
         public virtual string? Barcode { get; set; }
 
-        public virtual Collection<CollageDto>? Collages { get;  set; } //Sub collection
+        public virtual Collection<CollageDto>? Collages { get; set; } //Sub collection
 
     }
 
 
 
-    public class CreateUnivSectionDto 
+    public class CreateUnivSectionDto
     {
         //اسم فرع الجامعة        
         public virtual string? NameAr { get; set; }
@@ -56,13 +52,13 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
 
     }
 
-    public class UpdateUnivSectionDto :CreateUnivSectionDto
+    public class UpdateUnivSectionDto : CreateUnivSectionDto
     {
         public int Id { get; set; }
     }
 
 
-    public class CheckUnivSectionDtoDto:EntityDto<int?>
+    public class CheckUnivSectionDtoDto : EntityDto<int?>
     {
 
         //اسم فرع الجامعة        

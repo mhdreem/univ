@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.AuditLogging;
 
 namespace Univ.Hi_Student_Affairs.Dtos.CivilReg
 {
@@ -18,7 +14,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.CivilReg
 
     }
 
-    public class CreateCivilRegDto 
+    public class CreateCivilRegDto
     {
         [Required]
         public string NameAr { get; set; }

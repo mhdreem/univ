@@ -1,78 +1,83 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Entities;
+using Univ.Hi_Student_Affairs.Domain.Student.Admission;
+using Univ.Hi_Student_Affairs.enums;
 using Volo.Abp.Domain.Entities.Auditing;
 
-namespace Univ.Hi_Student_Affairs
+namespace Univ.Hi_Student_Affairs.Domain.StdAdmission
 {
     public class StdAdmission : FullAuditedAggregateRoot<Guid>
     {
 
+
+
         [ForeignKey("StudentId")]
-        public Guid? StudentId { get; set; }
-        public virtual Student? Student { get; set; }
+        public Guid? StudentId { get; private set; }
+
 
 
 
         [ForeignKey("AdmissionID")]
-        public int? AdmissionID { get; set; }
-        public virtual Admission? Admission { get; set; }
+        public int? AdmissionID { get; private set; }
+        public virtual Admission? Admission { get; private set; }
 
 
-        public int? Ord { get; set; }
+        public int? Ord { get; private set; }
+
 
         //قبول حسب مجموع.اختصاص
-        public bool? AdmissionType { get; set; }
+        public Acceptance Acceptance { get; private set; }
 
 
 
 
-       
+
 
         //رقم القبول بالمفاضلة
-        public int? No { get; set; }
+        public int? No { get; private set; }
 
 
         //تاريخ القبول
         [Column(TypeName = "Date")]
-        public DateTime? Date{ get; set; }
+        public DateTime? Date { get; private set; }
 
 
         //المجموع الصافي
-        public int? TotalMarkNet { get; set; }
+        public int? TotalMarkNet { get; private set; }
 
         //المجموع النهائي
-        public int? TotalMark { get; set; }
+        public int? TotalMark { get; private set; }
 
 
         //لغة التفاضيل
-        [ForeignKey("AdmissionLanguageId")]
-        public int? AdmissionLanguageId { get; set; }
-        public virtual Language? AdmissionLanguage { get; set; }
+
+        public virtual Language? AdmissionLanguage { get; private set; }
 
 
 
         //لغة المختارة
-        [ForeignKey("LanguageId")]
-        public int? LanguageId { get; set; }
-        public virtual Language? Language { get; set; }
+
+        public virtual Language? Language { get; private set; }
 
 
 
         //علامة الاختصاص
-        public uint? SubectMark{ get; set; }
+        public uint? SubectMark { get; private set; }
 
 
         //علامة اللغة
-        public int? LanguageMark { get; set; }
+        public int? LanguageMark { get; private set; }
 
-      
 
-        public string? Note { get; set; }
+
+        public string? Note { get; private set; }
+
+
+
+
+
+
+
 
 
     }

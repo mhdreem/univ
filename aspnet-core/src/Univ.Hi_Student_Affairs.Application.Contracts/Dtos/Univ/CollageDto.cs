@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.ObjectModel;
 using Volo.Abp.Application.Dtos;
 
 
@@ -9,9 +7,9 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
     public class CollageDto : EntityDto<int>
     {
 
-       
+
         public int? UnivSectionId { get; set; }
-       
+
 
 
         //اسم الكلية 
@@ -76,7 +74,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
     }
 
 
-    public class CreateCollageDto 
+    public class CreateCollageDto
     {
 
 
@@ -154,7 +152,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
 
     public class CheckCollageDto : EntityDto<int?>
     {
-       
+
         public int? UnivSectionId { get; set; }
 
 

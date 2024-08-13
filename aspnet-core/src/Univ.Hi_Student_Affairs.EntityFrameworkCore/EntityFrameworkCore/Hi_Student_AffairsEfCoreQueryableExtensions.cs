@@ -1,18 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Identity;
+using Univ.Hi_Student_Affairs.Domain.Country;
+using Univ.Hi_Student_Affairs.Domain.StdPunishment;
 
 namespace Univ.Hi_Student_Affairs.EntityFrameworkCore
 {
     public static class Hi_Student_AffairsEfCoreQueryableExtensions
     {
-        public static IQueryable<Continent> IncludeDetails(this IQueryable<Continent> queryable, bool include = true)
+        public static IQueryable<StdPunishment> IncludeDetails(this IQueryable<StdPunishment> queryable, bool include = true)
         {
-            if (queryable== null)
+            if (queryable == null)
                 throw new ArgumentNullException(nameof(queryable));
 
             if (!include)
@@ -21,12 +19,39 @@ namespace Univ.Hi_Student_Affairs.EntityFrameworkCore
             }
 
             return queryable
-                .Include(x => x.Countries)
-                .ThenInclude(x => x.Cities);
-                
+                .Include(x => x.Punishment)
+                .Include(x => x.PunishmentReason)
+                .Include(x => x.Class)
+                .Include(x => x.Semester)
+                .Include(x => x.SemesterEnd)
+
+                .Include(x => x.StdPunishmentStages)
+                .ThenInclude(x => x.PunishmentStage)
+
+                .Include(x => x.StdPunishmentStages)
+                .ThenInclude(x => x.Punishment);            
         }
 
-        public static IQueryable<Univ> IncludeDetails(this IQueryable<Univ> queryable, bool include = true)
+
+
+
+
+        public static IQueryable<Country> IncludeDetails(this IQueryable<Country> queryable, bool include = true)
+        {
+            if (queryable == null)
+                throw new ArgumentNullException(nameof(queryable));
+
+            if (!include)
+            {
+                return queryable;
+            }
+
+            return queryable
+                .Include(x => x.Cities);
+
+        }
+
+        public static IQueryable<Univ.Hi_Student_Affairs.Domain.Univ.Univ> IncludeDetails(this IQueryable<Univ.Hi_Student_Affairs.Domain.Univ.Univ> queryable, bool include = true)
         {
             if (queryable == null)
                 throw new ArgumentNullException(nameof(queryable));

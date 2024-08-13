@@ -1,148 +1,338 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Net.Http.Headers;
+using Univ.Hi_Student_Affairs.Domain.Abstruct;
+using Univ.Hi_Student_Affairs.enums;
 using Volo.Abp;
-using Volo.Abp.Domain.Entities;
 
-namespace Univ.Hi_Student_Affairs
+namespace Univ.Hi_Student_Affairs.Domain.Univ
 {
-    public class Univ : BasicAggregateRoot<int>
+    public class Univ : TEncodeTableAggregateRoot<int>
     {
+        public virtual UnivType UnivType { get; private set; }
+        public virtual ICollection<UnivSection>? UnivSections { get; protected private set; }
 
 
-        //اسم الجامعة        
-        public string NameAr { get; set; }
-        public string? NameEn { get; set; }
-
-        //الترتيب
-        public int? Ord { get; set; }
-
-
-        //رمز الجامعة بوزرارة التعليم
-        public virtual int? MinistryEncode { get; set; }
-
-        public virtual string? Barcode { get; set; }
-
-        public virtual Collection<UnivSection>? UnivSections { get;  set; } //Sub collection
-
-
-        [ForeignKey("UnivTypeId")]       
-        public virtual int? UnivTypeId { get; set; }
-        public virtual UnivType? UnivType{ get; set; }
-
-
-    public Univ()
+        public Univ(string nameAr, string? nameEn, int? ord, string? barcode, UnivType univType)
+           : base(nameAr, nameEn, ord, barcode)
         {
-            NameAr = "";
-            UnivSections = new Collection<UnivSection>();
+            SetUnivType(univType);
+
         }
 
-        public Univ(
-            string NameAr,
-            string NameEn,
-            int? Ord,
-            int? MinistryEncode ,
-            string? Barcode,
-            Collection<UnivSection>? UnivSections
-            )
+        public Univ(string nameAr, string? nameEn, int? ord, string? barcode, UnivType univType, ICollection<UnivSection>? univSections = null)
+            : base(nameAr, nameEn, ord, barcode)
         {
-            this.NameAr = NameAr;
-            this.NameEn = NameEn;
-            this.Ord = Ord;
-            this.MinistryEncode = MinistryEncode;
-            this.Barcode = Barcode;
-            this.UnivSections = UnivSections;
+            SetUnivType(univType);
+            UnivSections = univSections ?? new List<UnivSection>();
         }
 
-        ////////////////////////////////////
-        ///UnivSection
-        ////////////////////////////////////
-
-        public Univ AddUnivSection(
-             string name_ar, string name_en, int? ord, int? ministry_encode, string? barcode, Collection<Collage>? collages
-             )
+        public Univ(int id, string nameAr, string nameEn, int? ord, string barcode, UnivType univType, ICollection<UnivSection>? univSections = null)
+           : base(id, nameAr, nameEn, ord, barcode)
         {
-            if (UnivSections is null ||
-                UnivSections.Count() == 0)
-                UnivSections = new Collection<UnivSection>();
+            SetUnivType(univType);
+            UnivSections = univSections ?? new List<UnivSection>();
+        }
 
+        private void SetUnivType(UnivType univType)
+        {
+            UnivType = univType;
+        }
 
-            if (UnivSections.Where(x => x.NameAr != null && x.NameAr.Equals(name_ar)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameArAlreadyExists);
+        public void UpdateUnivType(UnivType univType)
+        {
+            SetUnivType(univType);
+        }
 
+        public Univ AddUnivSection(string nameAr, string nameEn, int? ord, string? barcode)
+        {
+            if (UnivSections == null)
+                UnivSections = new List<UnivSection>();
 
-            if (UnivSections.Where(x => x.NameEn != null && x.NameEn.Equals(name_en)).Any())
+            if (UnivSections.Any(x => x.NameAr == nameAr || x.NameEn == nameEn || x.Barcode == barcode))
                 throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
 
+            UnivSections.Add(new UnivSection(nameAr, nameEn, ord, barcode, this.Id, null));
+            return this;
+        }
 
-            if (ministry_encode != null &&
-                UnivSections.Where(x => x.MinistryEncode != null && x.MinistryEncode == ministry_encode).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityMinistryAlreadyExists);
+        public Univ RemoveUnivSection(int univSectionId)
+        {
+            var univSection = UnivSections?.SingleOrDefault(x => x.Id == univSectionId);
+            if (univSection == null)
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
 
+            UnivSections.Remove(univSection);
+            return this;
+        }
 
+        public Univ UpdateUnivSection(int univSectionId, string nameAr, string nameEn, int? ord, string? barcode)
+        {
+            var univSection = UnivSections?.SingleOrDefault(x => x.Id == univSectionId);
+            if (univSection == null)
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
 
-            UnivSections.Add(new UnivSection(name_ar, name_en, ord, ministry_encode, barcode, collages, this.Id));
+            if (UnivSections.Any(x => x.Id != univSectionId && (x.NameAr == nameAr || x.NameEn == nameEn || x.Barcode == barcode)))
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+            univSection.UpdateNameAr(nameAr);
+            univSection.UpdateNameEn(nameEn);
+            univSection.SetOrd(ord);
+            univSection.SetBarcode(barcode);
 
             return this;
         }
 
-
-
-        public Univ UpdateUnivSection(
-             int UnivSectionId,
-             string name_ar, string name_en, int? ord, int? ministry_encode, string? barcode, ICollection<Collage>? collages
-            )
+        public UnivSection GetUnivSection(int univSectionId)
         {
-            if (UnivSections is null ||
-                UnivSections.Count() == 0)
-                UnivSections = new Collection<UnivSection>();
-
-            var UnivSection = UnivSections.Where(x => x.Id == UnivSectionId).FirstOrDefault();
-            if (UnivSection is null)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-
-
-
-
-            if (UnivSections.Where(x => x.NameAr != null && x.Id != UnivSectionId && x.NameAr.Equals(name_ar)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameArAlreadyExists);
-
-
-            if (UnivSections.Where(x => x.NameEn != null && x.Id != UnivSectionId && x.NameEn.Equals(name_en)).Any())
+            var univSection = UnivSections?.SingleOrDefault(x => x.Id == univSectionId);
+            if (univSection == null)
                 throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
 
+            return univSection;
+        }
 
+        public UnivSection AddCollage(string nameAr, string? nameEn, int? ord, string? barcode, int univSectionId, string? deanAr, string? deanEn, int? numYear, Degree degree, string? degreeNameAr, string? degreeNameEn, ColType colType, ColClassification colClassification, ICollection<Department>? departments, ICollection<StudyPlan>? studyPlans)
+        {
+            var univSection = GetUnivSection(univSectionId);
+            univSection.AddCollage(nameAr, nameEn, ord, barcode, univSectionId, deanAr, deanEn, numYear, degree, degreeNameAr, degreeNameEn, colType, colClassification, departments, studyPlans);
 
-            if (ministry_encode != null &&
-                UnivSections.Where(x => x.MinistryEncode != null && x.Id != UnivSectionId && x.MinistryEncode == ministry_encode).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityMinistryAlreadyExists);
+            return univSection;
+        }
 
-            UnivSection.NameAr = name_ar;
-            UnivSection.NameEn = name_en;
-            UnivSection.Ord = ord;
-            UnivSection.MinistryEncode = ministry_encode;
+        public UnivSection RemoveCollage(int univSectionId, int collageId)
+        {
+            var univSection = GetUnivSection(univSectionId);
+            univSection.RemoveCollage(collageId);
 
+            return univSection;
+        }
 
+        public UnivSection UpdateCollage(int univSectionId, int collageId, string nameAr, string nameEn, int? ord, string? barcode, string? deanAr, string? deanEn, int? numYear, Degree degree, string? degreeNameAr, string? degreeNameEn, ColType colType, ColClassification colClassification, ICollection<Department>? departments, ICollection<StudyPlan>? studyPlans)
+        {
+            var univSection = GetUnivSection(univSectionId);
+            univSection.UpdateCollage(collageId,
+              nameAr, nameEn, ord, barcode, univSectionId, deanAr, deanEn, numYear, degree, degreeNameAr, degreeNameEn, colType, colClassification, departments, studyPlans);
 
-            return this;
+            return univSection;
+        }
+
+        public Collage GetCollage(int univSectionId, int collageId)
+        {
+            var univSection = GetUnivSection(univSectionId);
+            return univSection.GetCollage(collageId);
+        }
+
+        public Collage AddDepartment(int univSectionId, int collageId, string nameAr, string nameEn, int? ord, string? barcode, ICollection<Branch>? branchs)
+        {
+            var collage = GetCollage(univSectionId, collageId);
+            collage.AddDepartment(nameAr, nameEn, ord, barcode, branchs);
+
+            return collage;
+        }
+
+        public Collage RemoveDepartment(int univSectionId, int collageId, int departmentId)
+        {
+            var collage = GetCollage(univSectionId, collageId);
+            collage.RemoveDepartment(departmentId);
+
+            return collage;
+        }
+
+        public Collage UpdateDepartment(int univSectionId, int collageId, int departmentId, string nameAr, string nameEn, int? ord, string? barcode, ICollection<Branch>? branchs)
+        {
+            var collage = GetCollage(univSectionId, collageId);
+            collage.UpdateDepartment(departmentId,
+              nameAr, nameEn, ord, barcode, branchs);
+
+            return collage;
+        }
+
+        public Department GetDepartment(int univSectionId, int collageId, int departmentId)
+        {
+            var collage = GetCollage(univSectionId, collageId);
+            return collage.GetDepartment(departmentId);
         }
 
 
-        public Univ RemoveUnivSection(int UnivSectionId)
+
+        public Department AddBranch(int univSectionId, int collageId, int departmentId, string nameAr, string nameEn, int? ord, string? barcode)
+        {
+            var department = GetDepartment(univSectionId, collageId, departmentId);
+            department.AddBranch(nameAr, nameEn, ord, barcode);
+
+            return department;
+        }
+
+        public Department RemoveBranch(int univSectionId, int collageId, int departmentId, int branchId)
+        {
+            var department = GetDepartment(univSectionId, collageId, departmentId);
+            department.RemoveBranch(branchId);
+
+            return department;
+        }
+
+        public Department UpdateBranch(int univSectionId, int collageId, int departmentId, int branchId,
+            string nameAr, string nameEn, int? ord, string? barcode)
+        {
+            var department = GetDepartment(univSectionId, collageId, departmentId);
+            department.UpdateBranch(branchId, nameAr, nameEn, ord, barcode);
+
+            return department;
+        }
+
+        public Branch GetBranch(int univSectionId, int collageId, int departmentId, int branchId)
+        {
+            var department = GetDepartment(univSectionId, collageId, departmentId);
+            return department.GetBranch(branchId);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public Collage AddStudyPlan(int univSectionId, int collageId, string name, int? ord, string? description, DateTime? fireDate)
+        {
+            var collage = GetCollage(univSectionId, collageId);
+            collage.AddStudyPlan(name, ord, description, fireDate);
+
+            return collage;
+        }
+
+        public Collage RemoveStudyPlan(int univSectionId, int collageId, int studyPlanId)
+        {
+            var collage = GetCollage(univSectionId, collageId);
+            collage.RemoveStudyPlan(studyPlanId);
+
+            return collage;
+        }
+
+        public Collage UpdateStudyPlan(int univSectionId, int collageId, int studyPlanId, string name, int? ord, string? description, DateTime? fireDate)
+        {
+            var collage = GetCollage(univSectionId, collageId);
+            collage.UpdateStudyPlan(studyPlanId, name, ord, description, fireDate);
+
+            return collage;
+        }
+
+        public StudyPlan GetStudyPlan(int univSectionId, int collageId, int studyPlanId)
+        {
+            var collage = GetCollage(univSectionId, collageId);
+            return collage.GetStudyPlan(studyPlanId);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            var other = (Univ)obj;
+            return Id == other.Id &&
+                   UnivType == other.UnivType &&
+                   NameAr == other.NameAr &&
+                   NameEn == other.NameEn &&
+                   Ord == other.Ord &&
+                   Barcode == other.Barcode &&
+                   UnivSections == other.UnivSections;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, UnivType, NameAr, NameEn, Ord, Barcode, UnivSections);
+        }
+
+        public override string ToString()
+        {
+            return $"[Univ: Id={Id}, UnivType={UnivType}, NameAr={NameAr}, NameEn={NameEn}, Ord={Ord}, Barcode={Barcode}, UnivSections={UnivSections.Count}]";
+        }
+    }
+
+    /*
+    public class Univ : TEncodeTableAggregateRoot<int>
+    {
+        public virtual UnivType? UnivType { get; private set; }
+
+        public virtual ICollection<UnivSection>? UnivSections { get; protected private set; } //Sub collection
+
+        private void SetUnivType(UnivType univType)
+        {
+            UnivType = univType;
+        }
+
+        public void UpdateUnivType(UnivType univType)
+        {
+            SetUnivType(univType);
+        }
+
+   
+
+
+
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            var other = (Univ)obj;
+            return Id == other.Id &&
+                   UnivType == other.UnivType &&
+                   NameAr == other.NameAr &&
+                   NameEn == other.NameEn &&
+                   Ord == other.Ord &&
+                   Barcode == other.Barcode &&
+                   UnivType == other.UnivType;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, UnivType, NameAr, NameEn, Ord, Barcode, UnivSections);
+        }
+
+        public override string ToString()
+        {
+            return $"[Univ: Id={Id}, UnivType={UnivType}, NameAr={NameAr}, NameEn={NameEn}, Ord={Ord},Barcode={Barcode},UnivSections={UnivSections}]";
+        }
+
+
+
+        public Univ(string nameAr, string? nameEn, int? ord, string? barcode, UnivType univType, ICollection<UnivSection>? univSections)
+            : base(nameAr, nameEn, ord, barcode)
+
+        {
+            SetUnivType(univType);
+            UnivSections = univSections ?? new List<UnivSection>();
+        }
+
+        public Univ(int id, string nameAr, string nameEn, int? ord, string barcode, UnivType univType, ICollection<UnivSection>? univSections)
+           : base(id, nameAr, nameEn, ord, barcode)
+        {
+            SetUnivType(univType);
+            UnivSections = univSections ?? new List<UnivSection>();
+        }
+
+
+        public Univ RemoveUnivSection(int univSectionId)
         {
             if (UnivSections is null ||
                 UnivSections.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
 
-
-            var UnivSection = UnivSections.SingleOrDefault(x => x.Id == UnivSectionId);
+            var UnivSection = UnivSections.SingleOrDefault(x => x.Id == univSectionId);
             if (UnivSection is null)
             {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
             }
             UnivSections.Remove(UnivSection);
 
@@ -152,589 +342,285 @@ namespace Univ.Hi_Student_Affairs
 
 
 
-        public UnivSection GetUnivSection(int UnivSectionId)
+
+        public Univ AddUnivSection(
+             string nameAr, string nameEn, int? ord, string? barcode
+             )
+        {
+            if (UnivSections is null ||
+                UnivSections.Count() == 0)
+                UnivSections = new List<UnivSection>();
+
+
+            if (UnivSections.Where(x => x.NameAr != null && x.NameAr.Equals(nameAr)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+            if (UnivSections.Where(x => x.NameEn != null && x.NameEn.Equals(nameAr)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+            if (!string.IsNullOrWhiteSpace(barcode) &&
+                UnivSections.Where(x => x.Barcode != null && x.Barcode.Equals(barcode)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+            UnivSections.Add(new UnivSection(nameAr, nameEn, ord, barcode, this.Id,null));
+
+            // Raise domain event
+            //AddDomainEvent(new UnivSectionAddedDomainEvent(this, city));
+
+            return this;
+        }
+
+
+
+        public Univ UpdateUnivSection(
+             int univSectionId,
+              string nameAr, string nameEn, int? ord, string? barcode
+            )
+        {
+            if (UnivSections is null ||
+                UnivSections.Count() == 0)
+                UnivSections = new List<UnivSection>();
+
+            var UnivSection = UnivSections.Where(x => x.Id == univSectionId).FirstOrDefault();
+            if (UnivSection is null)
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+
+            if (UnivSections.Where(x => x.NameAr != null && x.Id != univSectionId && x.NameAr.Equals(nameAr)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+            if (UnivSections.Where(x => x.NameEn != null && x.Id != univSectionId && x.NameEn.Equals(nameAr)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+            if (!string.IsNullOrWhiteSpace(barcode) &&
+                UnivSections.Where(x => !string.IsNullOrWhiteSpace(x.Barcode) && x.Id != univSectionId && x.Barcode.Equals(barcode)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+            UnivSection.UpdateNameAr(nameAr);
+            UnivSection.UpdateNameEn(nameEn);
+            UnivSection.SetNameEn(nameEn);
+            UnivSection.SetOrd(ord);
+            UnivSection.SetBarcode(barcode);
+
+
+            // Raise domain event
+            //AddDomainEvent(new UnivSectionUpdateDomainEvent(this, city));
+
+            return this;
+        }
+
+
+
+        public UnivSection GetUnivSection(int univSectionId)
         {
             if (UnivSections is null ||
                 UnivSections.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
 
-
-            var UnivSection = UnivSections.Single(x => x.Id == UnivSectionId);
+            var UnivSection = UnivSections.Single(x => x.Id == univSectionId);
             if (UnivSection is null)
             {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
             }
             return UnivSection;
         }
 
 
-        ////////////////////////////////////
-        ///Collage
-        ////////////////////////////////////
 
-
-        public Univ RemoveCollage(int UnivSectionId, int collageId)
+        public UnivSection RemoveCollage(int collageId,int univSectionId)
         {
-            if (this.UnivSections is null ||
-                this.UnivSections.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);            
-
-            var UnivSection = this.UnivSections.SingleOrDefault(x => x.Id == UnivSectionId);
-            if (UnivSection is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (UnivSection is null ||
-                UnivSection.Collages is null ||
-                UnivSection.Collages.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            var Collage = UnivSection.Collages.SingleOrDefault(x => x.Id == collageId);
-            if (Collage is null )
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-            UnivSection.Collages.Remove(Collage);
-
-            return this;
-        }
-
-
-        public Univ AddCollage(
-                int UnivSectionId, 
-                string NameAr,
-                string NameEn,
-                string? DeanAr,
-                string? DeanEn,
-                int? NumYear,
-                int? Ord,
-                string? DegreeNameAr,
-                string? DegreeNameEn,
-                int? MinistryEncode,
-                string? Barcode
-             )
-        {
-            if (this.UnivSections is null ||
-                this.UnivSections.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-            var UnivSection = this.UnivSections.SingleOrDefault(x => x.Id == UnivSectionId);
-            if (UnivSection is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (UnivSection.Collages is null )
-                UnivSection.Collages = new Collection<Collage>();
-
-            UnivSection.Collages.Add(new Collage(NameAr,
-                                                NameEn,
-                                                DeanAr,
-                                                DeanEn,
-                                                NumYear,
-                                                Ord,
-                                                DegreeNameAr,
-                                                DegreeNameEn,
-                                                MinistryEncode,
-                                                Barcode,
-                                                UnivSection.Id
-                                                ));
-
-
-
-
-
-           
-            return this;
-        }
-
-
-
-        public Univ UpdateCollage(
-              int UnivSectionId, 
-              int CollageId,
-              string NameAr,
-              string NameEn,
-              string? DeanAr,
-              string? DeanEn,
-              int? NumYear,
-              int? Ord,
-              string? DegreeNameAr,
-              string? DegreeNameEn,
-              int? MinistryEncode,
-              string? Barcode
-            )
-        {
-
-            if (this.UnivSections is null ||
-               this.UnivSections.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-            var UnivSection = this.UnivSections.SingleOrDefault(x => x.Id == UnivSectionId);
-            if (UnivSection is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (UnivSection.Collages is null ||
-                UnivSection.Collages.Count == 0 )
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
           
-          
-
-            if (UnivSection.Collages.Where(x => x.NameAr != null && x.Id != CollageId && x.NameAr.Equals(NameAr)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameArAlreadyExists);
-
-
-            if (UnivSection.Collages.Where(x => x.NameEn != null && x.Id != CollageId && x.NameEn.Equals(NameEn)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
-
-
-
-
-
-            if (MinistryEncode != null &&
-                UnivSection.Collages.Where(x => x.MinistryEncode != null && x.Id != CollageId && x.MinistryEncode == MinistryEncode).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityMinistryAlreadyExists);
-
-
-
-            var Collage = UnivSection.Collages.SingleOrDefault(x => x.Id == CollageId);
-            if (Collage is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-
-            Collage.NameAr = NameAr;
-            Collage.NameEn = NameEn;
-            Collage.Ord = Ord;
-            Collage.MinistryEncode = MinistryEncode;
-            Collage.DeanEn = DeanEn;
-            Collage.DeanAr = DeanAr;
-            Collage.Barcode = Barcode;
-            Collage.DegreeNameAr = DegreeNameAr;
-            Collage.DegreeNameEn = DegreeNameEn;
-            Collage.NumYear = NumYear;
-
-
-            return this;
-
-          
-
-
-         
         }
 
 
 
-        ///////////////////////////////////
-        ///Department
-        //////////////////////////////////
-        public Univ RemoveDepartment(int UnivSectionId, int collageId,int DepartmentId)
-        {
-
-            var UnivSection = this.UnivSections.SingleOrDefault(x => x.Id == UnivSectionId);
-            if (UnivSection is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (UnivSection is null ||
-                UnivSection.Collages is null ||
-                UnivSection.Collages.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
 
 
-            var Collage = UnivSection.Collages.SingleOrDefault(x => x.Id == collageId);
-            if (Collage is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-
-            if (Collage.Departments is null ||
-                Collage.Departments.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            var Department = Collage.Departments.SingleOrDefault(x => x.Id == DepartmentId);
-            if (Department is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-            Collage.Departments.Remove(Department);
-
-            return this;
-        }
-
-
-        public Univ AddDepartment(
-              int UnivSectionId, int collageId, 
-              string NameAr,
-              string NameEn,
-              int? Ord,
-              string? DegreeNameAr,
-              string? DegreeNameEn,
-              int? MinistryEncode,
-              string? Barcode
+        public UnivSection AddCollage(
+            int collageId, int univSectionId,
+             string nameAr, string? nameEn, int? ord, string? barcode, string? deanAr, string? deanEn, int? numYear, Degree degree, string? degreeNameAr, string? degreeNameEn, ColType colType, ColClassification colClassification, ICollection<Department>? departments, ICollection<StudyPlan>? studyPlans
              )
         {
 
-           
-            if (
-                this.UnivSections is null ||
-                this.UnivSections.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            //الحصول على فرع الجامعة
-            var UnivSection = this.UnivSections.SingleOrDefault(x => x.Id == UnivSectionId);
-            if (UnivSection is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (UnivSection is null ||
-                UnivSection.Collages is null ||
-                UnivSection.Collages.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-            //الحصول على فرع الكلية
-            var Collage = UnivSection.Collages.SingleOrDefault(x => x.Id == collageId);
-            if (Collage is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-
-            if (Collage.Departments is null)
-                Collage.Departments = new Collection<Department>();
-
-
-
-
-
-            //فحص لاقسام
-            if (Collage.Departments.Where(x => x.NameAr != null && x.NameAr.Equals(NameAr)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameArAlreadyExists);
-
-
-            if (Collage.Departments.Where(x => x.NameEn != null && x.NameEn.Equals(NameEn)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
-
-
-            if (MinistryEncode != null &&
-                Collage.Departments.Where(x => x.MinistryEncode != null && x.MinistryEncode == MinistryEncode).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityMinistryAlreadyExists);
-
-
-
-            Collage.Departments.Add(new Department(NameAr, NameEn, Ord, DegreeNameAr, DegreeNameEn, MinistryEncode, Barcode, Collage.Id));
-
-            return this;
         }
 
 
 
-        public Univ UpdateDepartment(
-              int UnivSectionId, int collageId, int DepartmentId,
-              string NameAr,
-              string NameEn,
-              int? Ord,
-              string? DegreeNameAr,
-              string? DegreeNameEn,
-              int? MinistryEncode,
-              string? Barcode
+        public UnivSection UpdateCollage(
+            int collageId, int univSectionId,int collageId,
+             string nameAr, string? nameEn, int? ord, string? barcode, string? deanAr, string? deanEn, int? numYear, Degree degree, string? degreeNameAr, string? degreeNameEn, ColType colType, ColClassification colClassification, ICollection<Department>? departments, ICollection<StudyPlan>? studyPlans
             )
         {
 
-            if (
-              this.UnivSections is null ||
-              this.UnivSections.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            //الحصول على فرع الجامعة
-            var UnivSection = this.UnivSections.SingleOrDefault(x => x.Id == UnivSectionId);
-            if (UnivSection is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (UnivSection is null ||
-                UnivSection.Collages is null ||
-                UnivSection.Collages.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-            //الحصول على فرع الكلية
-            var Collage = UnivSection.Collages.SingleOrDefault(x => x.Id == collageId);
-            if (Collage is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-
-
-
-            if (Collage.Departments is null ||
-                Collage.Departments.Count() == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-
-
-            //الحصول على فرع القسم
-            var Department = Collage.Departments.Where(x => x.Id == DepartmentId).FirstOrDefault();
-            if (Department is null)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-
-
-
-
-            if (Collage.Departments.Where(x => x.NameAr != null && x.Id != DepartmentId && x.NameAr.Equals(NameAr)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameArAlreadyExists);
-
-
-            if (Collage.Departments.Where(x => x.NameEn != null && x.Id != DepartmentId && x.NameEn.Equals(NameEn)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
-
-
-
-
-
-            if (MinistryEncode != null &&
-                Collage.Departments.Where(x => x.MinistryEncode != null && x.Id != DepartmentId && x.MinistryEncode == MinistryEncode).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityMinistryAlreadyExists);
-
-
-
-
-
-
-            Department.NameAr = NameAr;
-            Department.NameEn = NameEn;
-            Department.Ord = Ord;
-            Department.MinistryEncode = MinistryEncode;
-            Department.Barcode = Barcode;
-            Department.DegreeNameAr = DegreeNameAr;
-            Department.DegreeNameEn = DegreeNameEn;
-
-
-            return this;
-        }
-
-        ///////////////////////////
-        /// الفرع
-        //////////////////////////////
-        public Univ RemoveBranch(int UnivSectionId, int collageId, int DepartmentId,int BranchId)
-        {
-
-            //الحصول على فرع الجامعة
-            var UnivSection = this.UnivSections.SingleOrDefault(x => x.Id == UnivSectionId);
-            if (UnivSection is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (UnivSection is null ||
-                UnivSection.Collages is null ||
-                UnivSection.Collages.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            //الحصول على الجامعة
-            var Collage = UnivSection.Collages.SingleOrDefault(x => x.Id == collageId);
-            if (Collage is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-
-            if (Collage.Departments is null ||
-                Collage.Departments.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            //الحصول على القسم
-            var Department = Collage.Departments.SingleOrDefault(x => x.Id == DepartmentId);
-            if (Department is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            //الحصول على الفرع
-            if (Department.Branchs is null ||
-                Department.Branchs.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            var Branch = Department.Branchs.SingleOrDefault(x => x.Id == DepartmentId);
-            if (Branch is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-
-            Department.Branchs.Remove(Branch);
-            return this;
-        }
-
-
-        public Univ AddBranch(
-              int UnivSectionId, int collageId, int DepartmentId,
-              string name_Ar, string name_En, int? ord, string? barcode, int? ministry_Encode
-             )
-        {
-            //الحصول على فرع الجامعة
-            var UnivSection = this.UnivSections.SingleOrDefault(x => x.Id == UnivSectionId);
-            if (UnivSection is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (UnivSection is null ||
-                UnivSection.Collages is null ||
-                UnivSection.Collages.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            //الحصول على الجامعة
-            var Collage = UnivSection.Collages.SingleOrDefault(x => x.Id == collageId);
-            if (Collage is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-
-            if (Collage.Departments is null ||
-                Collage.Departments.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            //الحصول على القسم
-            var Department = Collage.Departments.SingleOrDefault(x => x.Id == DepartmentId);
-            if (Department is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (Department.Branchs is null)
-                Department.Branchs = new Collection<Branch>();
-
-
-            if (Department is null ||
-                Department.Branchs is null ||
-                Department.Branchs.Count() == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-
-
-            //فحص عدم التكرار
-
-
-
-            if (Department.Branchs.Where(x => x.NameAr != null && x.NameAr.Equals(name_Ar)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameArAlreadyExists);
-
-
-            if (Department.Branchs.Where(x => x.NameEn != null && x.NameEn.Equals(name_En)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
-
-
-            if (MinistryEncode != null &&
-                Department.Branchs.Where(x => x.MinistryEncode != null && x.MinistryEncode == ministry_Encode).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityMinistryAlreadyExists);
-
-      
-
-            Department.Branchs.Add(new Branch(name_Ar, name_En, ord, barcode, ministry_Encode, Department.Id));
-
-            return this;
         }
 
 
 
-        public Univ UpdateBranch(
-              int UnivSectionId, int collageId, int DepartmentId, int BranchId,
-              string name_Ar, string name_En, int? ord, string? barcode, int? ministry_Encode
-            )
+        public Collage GetCollage(int collageId, int univSectionId)
         {
-            //الحصول على فرع الجامعة
-            var UnivSection = this.UnivSections.SingleOrDefault(x => x.Id == UnivSectionId);
-            if (UnivSection is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (UnivSection is null ||
-                UnivSection.Collages is null ||
-                UnivSection.Collages.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            //الحصول على الجامعة
-            var Collage = UnivSection.Collages.SingleOrDefault(x => x.Id == collageId);
-            if (Collage is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-
-            if (Collage.Departments is null ||
-                Collage.Departments.Count == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryZeroLengthOrNullCitiesList);
-
-
-            //الحصول على القسم
-            var Department = Collage.Departments.SingleOrDefault(x => x.Id == DepartmentId);
-            if (Department is null)
-            {
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-            }
-
-            if (Department is null ||
-                Department.Branchs is null ||
-                Department.Branchs.Count() == 0)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-
-
-            var Branch = Department.Branchs.Where(x => x.Id == BranchId).FirstOrDefault();
-            if (Branch is null)
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CountryNotExists);
-
-
-
-
-            if (Department.Branchs.Where(x => x.NameAr != null && x.Id != BranchId && x.NameAr.Equals(name_Ar)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameArAlreadyExists);
-
-
-            if (Department.Branchs.Where(x => x.NameEn != null && x.Id != BranchId && x.NameEn.Equals(name_En)).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
-
-
-
-
-
-            if (ministry_Encode != null &&
-                Department.Branchs.Where(x => x.MinistryEncode != null && x.Id != BranchId && x.MinistryEncode == ministry_Encode).Any())
-                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityMinistryAlreadyExists);
-
-
-            Branch.NameAr = name_Ar;
-            Branch.NameEn = name_En;
-            Branch.Ord = ord;
-            Branch.MinistryEncode = ministry_Encode;
-            Branch.Barcode = barcode;
             
+        }
+
+
+        public Collage RemoveDepartment(int collageId, int univSectionId,int departmentId)
+        {
+
+        }
+
+
+
+
+
+        public Collage AddDepartment(
+            int collageId, int univSectionId, 
+             string nameAr, string? nameEn, int? ord, string? barcode,  ICollection<Branch>? branchs
+             )
+        {
+
+        }
+
+
+
+        public Collage UpdateDepartment(
+   int collageId, int univSectionId,int departmentId,
+             string nameAr, string? nameEn, int? ord, string? barcode, ICollection<Branch>? branchs
+            )
+        {
+           
+        }
+
+
+
+        public Department GetDepartment(int collageId, int univSectionId, int departmentId)
+        {
+           
+        }
+
+
+        public Collage RemoveStudyPlan(int collageId, int univSectionId)
+        {
+           
+        }
+
+        public Collage AddStudyPlan(int collageId, int univSectionId,
+             string name, int? ord, string? description, DateTime? FireDate
+             )
+        {
+
+        }
+
+        public Collage UpdateStudyPlan(int collageId, int univSectionId,
+             int studyPlanId,
+              string name, int? ord, string? description, DateTime? FireDate
+            )
+        {
+           
+        }
+
+
+
+        public StudyPlan GetStudyPlan(int collageId, int univSectionId,
+             int studyPlanId)
+        {
+          
+        }
+
+        public Department AddBranch(
+           string nameAr, string nameEn, int? ord, string? barcode
+           )
+        {
+            if (Branchs is null ||
+                Branchs.Count() == 0)
+                Branchs = new List<Branch>();
+
+
+            if (Branchs.Where(x => x.NameAr != null && x.NameAr.Equals(nameAr)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+            if (Branchs.Where(x => x.NameEn != null && x.NameEn.Equals(nameAr)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+            if (!string.IsNullOrWhiteSpace(barcode) &&
+                Branchs.Where(x => x.Barcode != null && x.Barcode.Equals(barcode)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+            Branchs.Add(new Branch(nameAr, nameEn, ord, barcode, this.Id));
+
+            // Raise domain event
+            //AddDomainEvent(new BranchAddedDomainEvent(this, city));
 
             return this;
         }
 
 
 
+        public Department UpdateBranch(
+             int branchId,
+              string nameAr, string nameEn, int? ord, string? barcode, string? phoneCode
+            )
+        {
+            if (Branchs is null ||
+                Branchs.Count() == 0)
+                Branchs = new List<Branch>();
 
+            var Branch = Branchs.Where(x => x.Id == branchId).FirstOrDefault();
+            if (Branch is null)
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+
+
+            if (Branchs.Where(x => x.NameAr != null && x.Id != branchId && x.NameAr.Equals(nameAr)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+            if (Branchs.Where(x => x.NameEn != null && x.Id != branchId && x.NameEn.Equals(nameAr)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+            if (!string.IsNullOrWhiteSpace(barcode) &&
+                Branchs.Where(x => !string.IsNullOrWhiteSpace(x.Barcode) && x.Id != branchId && x.Barcode.Equals(barcode)).Any())
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+
+
+            Branch.UpdateNameAr(nameAr);
+            Branch.UpdateNameEn(nameEn);
+            Branch.SetNameEn(nameEn);
+            Branch.SetOrd(ord);
+            Branch.SetBarcode(barcode);
+
+
+            // Raise domain event
+            //AddDomainEvent(new BranchUpdateDomainEvent(this, city));
+
+            return this;
+        }
+
+
+
+        public Branch GetBranch(int branchId)
+        {
+            if (Branchs is null ||
+                Branchs.Count == 0)
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+
+
+            var Branch = Branchs.Single(x => x.Id == branchId);
+            if (Branch is null)
+            {
+                throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
+            }
+            return Branch;
+        }
     }
+    */
 }
+

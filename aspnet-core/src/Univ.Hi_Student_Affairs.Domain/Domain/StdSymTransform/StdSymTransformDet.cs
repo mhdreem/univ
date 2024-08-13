@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.Domain.Entities;
 
-namespace Univ.Hi_Student_Affairs
+namespace Univ.Hi_Student_Affairs.Domain.StdSymTransform
 {
-    public class StdSymTransformDet : FullAuditedAggregateRoot<Guid>
+    public class StdSymTransformDet : Entity<Guid>
     {
-        
+
         [ForeignKey("StdSymTransformId")]
-        public Guid? StdSymTransformId { get; set; }
-        public StdSymTransform? StdSymTransform { get; set; }
+        public Guid? StdSymTransformId { get; private set; }
+
 
 
     }

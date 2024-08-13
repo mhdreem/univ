@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Univ.Hi_Student_Affairs
+﻿namespace Univ.Hi_Student_Affairs
 {
-    public enum DeprivationType
+    public enum DeprivationType : byte
     {
-        UniversityAttendance,
-        ApplyingExam
+        UniversityAttendance = 0,
+        ApplyingExam = 1
     }
 }

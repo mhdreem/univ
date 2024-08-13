@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
@@ -17,7 +17,7 @@ namespace Univ.Hi_Student_Affairs.Data;
 
 public class Hi_Student_AffairsDbMigrationService : ITransientDependency
 {
-    public ILogger<Hi_Student_AffairsDbMigrationService> Logger { get; set; }
+    public ILogger<Hi_Student_AffairsDbMigrationService> Logger { get; private set; }
 
     private readonly IDataSeeder _dataSeeder;
     private readonly IEnumerable<IHi_Student_AffairsDbSchemaMigrator> _dbSchemaMigrators;

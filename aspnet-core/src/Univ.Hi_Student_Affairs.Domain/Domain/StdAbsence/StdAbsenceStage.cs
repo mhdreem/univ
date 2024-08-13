@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.Domain.Entities;
 
-namespace Univ.Hi_Student_Affairs
+namespace Univ.Hi_Student_Affairs.Domain.StdAbsence
 {
-    public class StdAbsenceStage : FullAuditedAggregateRoot<Guid>
+    public class StdAbsenceStage : Entity<Guid>
     {
         [ForeignKey("StdAbsenceId")]
-        public Guid? StdAbsenceId { get; set; }
-        public StdAbsence? StdAbsence { get; set; }
+        public Guid? StdAbsenceId { get; private set; }
+
 
     }
 }

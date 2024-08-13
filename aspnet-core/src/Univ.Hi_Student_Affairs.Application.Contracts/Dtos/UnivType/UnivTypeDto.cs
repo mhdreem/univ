@@ -1,10 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using Univ.Hi_Student_Affairs.Dtos.Univ;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.UnivType
 {
@@ -21,11 +15,11 @@ namespace Univ.Hi_Student_Affairs.Dtos.UnivType
         //الترتيب
         public virtual int? Ord { get; set; }
 
-     
+
     }
 
 
-    public class CreateUnivTypeDto 
+    public class CreateUnivTypeDto
     {
 
         //اسم نوع الجامعة
@@ -37,14 +31,14 @@ namespace Univ.Hi_Student_Affairs.Dtos.UnivType
         //الترتيب
         public virtual int? Ord { get; set; }
 
-      
+
     }
 
 
     public class UpdateUnivTypeDto : CreateUnivTypeDto
     {
 
-public int Id { get; set; }
+        public int Id { get; set; }
     }
 
 

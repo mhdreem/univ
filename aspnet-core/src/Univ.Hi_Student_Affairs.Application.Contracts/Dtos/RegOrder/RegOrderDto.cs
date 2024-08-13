@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.RegOrder
 {
@@ -15,7 +14,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.RegOrder
         public virtual int? Ord { get; set; }
     }
 
-    public class CreateRegOrderDto 
+    public class CreateRegOrderDto
     {
         // اسم الأمر 
         public virtual string? Name { get; set; }
@@ -29,7 +28,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.RegOrder
 
     public class UpdateRegOrderDto : CreateRegOrderDto
     {
-        public int Id{ get; set; }
+        public int Id { get; set; }
     }
 
 

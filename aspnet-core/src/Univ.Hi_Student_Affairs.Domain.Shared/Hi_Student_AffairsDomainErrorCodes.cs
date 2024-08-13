@@ -3,7 +3,7 @@
 public static class Hi_Student_AffairsDomainErrorCodes
 {
     /* You can add your business exception error codes here, as constants */
-    
+
 
     public const string AbsenceOrderNameAlreadyExists = "Univ:AbsenceOrder01";
     public const string AbsenceOrderNotExists = "Univ:AbsenceOrder02";
@@ -55,7 +55,7 @@ public static class Hi_Student_AffairsDomainErrorCodes
     public const string PunishmentNotExists = "Univ:AffiliationStage02";
 
 
-    
+
 
 
     public const string RegStageNotExists = "Univ:Admission01";
@@ -88,7 +88,7 @@ public static class Hi_Student_AffairsDomainErrorCodes
 
 
     public const string DegreeNameArAlreadyExists = "Univ:Admission01";
-    public const string DegreeNameEnAlreadyExists = "Univ:Admission02";       
+    public const string DegreeNameEnAlreadyExists = "Univ:Admission02";
     public const string DegreeNotExists = "Univ:Admission05";
 
     public const string MinistryNameArAlreadyExists = "Univ:Admission01";
@@ -104,7 +104,7 @@ public static class Hi_Student_AffairsDomainErrorCodes
     public const string AdmissionNotExists = "Univ:Admission05";
 
 
-    
+
 
 
     public const string AdmissionKindNotExists = "Univ:AdmissionKind01";
@@ -196,14 +196,14 @@ public static class Hi_Student_AffairsDomainErrorCodes
     public const string UnivTypeNameArAlreadyExists = "Univ:UnivType02";
     public const string UnivTypeNameEnAlreadyExists = "Univ:UnivType03";
 
-    
-        
+
+
 
 
     public const string CollTypeNotExists = "Univ:CollType01";
     public const string CollTypeNameAlreadyExists = "Univ:CollType02";
 
 
-    
+
 
 }

@@ -9,7 +9,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.StdTermination
 {
-    public class StdTerminationDto :FullAuditedEntityDto<Guid>
+    public class StdTerminationDto : FullAuditedEntityDto<Guid>
     {
         public TerminationState? TerminationState { get; set; }
 
@@ -40,13 +40,13 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdTermination
 
         //الفصل الحالي
         public int? SemesterId { get; set; }
-        
+
         public virtual SemesterDto? Semester { get; set; }
 
 
 
         public int? PrevAdmissionId { get; set; }
-        public AdmissionDto? PrevAdmission{ get; set; }
+        public AdmissionDto? PrevAdmission { get; set; }
 
 
         public string? Agent { get; set; }

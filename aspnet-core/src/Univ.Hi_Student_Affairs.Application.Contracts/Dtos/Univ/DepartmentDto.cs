@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Univ
 {
@@ -11,7 +10,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
         public int? UnivId { get; set; }
         public int? UnivSectionId { get; set; }
         public int? CollageId { get; set; }
-       
+
 
 
         //اسم القسم
@@ -45,11 +44,11 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
         public virtual Collection<BranchDto>? Branchs { get; set; }
 
 
-      
+
     }
 
 
-    public class CreateDepartmentDto 
+    public class CreateDepartmentDto
     {
 
         public int? UnivId { get; set; }
@@ -95,7 +94,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
 
     public class UpdateDepartmentDto : CreateDepartmentDto
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
     }
 
     public class CheckDepartmentDto : EntityDto<int?>
@@ -134,7 +133,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
         //رمز القسم بوزراة التعليم
         public virtual string? Barcode { get; set; }
 
-     
+
 
 
     }

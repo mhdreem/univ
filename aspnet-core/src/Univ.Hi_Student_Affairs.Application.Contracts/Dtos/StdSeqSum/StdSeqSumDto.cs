@@ -24,25 +24,25 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdSeqSum
 
         //الكلية
         public int? UnivId { get; set; }
-        
+
         public virtual UnivDto? Univ { get; set; }
 
 
         //الكلية
         public int? UnivSectionId { get; set; }
-        
+
         public virtual UnivSectionDto? UnivSection { get; set; }
 
 
         //الكلية
         public int? CollageId { get; set; }
-        
+
         public virtual CollageDto? Collage { get; set; }
 
 
         //الاختصاص
         public int? DepartmentId { get; set; }
-        
+
         public virtual DepartmentDto? Department { get; set; }
 
 
@@ -50,13 +50,13 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdSeqSum
 
         //القسم
         public int? BranchId { get; set; }
-        
+
         public virtual BranchDto? Branch { get; set; }
 
 
         //السنة الدراسية الحالية
         public int? ClassId { get; set; }
-        
+
         public virtual ClassDto? Class { get; set; }
 
         //الفصل الحالي
@@ -66,11 +66,11 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdSeqSum
 
 
         public int? SeqStatusId { get; set; }
-        
+
         public virtual SeqStatusDto? SeqStatus { get; set; }
 
         public int? SeqResultId { get; set; }
-        
+
         public virtual SeqResultDto? SeqResult { get; set; }
 
         //مثبت

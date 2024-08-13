@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Grade
 {
-    public  class GradeDto : EntityDto<int>
+    public class GradeDto : EntityDto<int>
     {
-  
+
 
 
         //اسم الدرجة بالعربي        

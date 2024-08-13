@@ -1,21 +1,187 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Univ.Hi_Student_Affairs.Domain.Continent;
+using Univ.Hi_Student_Affairs.enums;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
-using Volo.Abp;
-using System.Collections.ObjectModel;
-using Microsoft.Extensions.Logging;
-using System.Security.Cryptography;
-using System.Net.Mime;
-using System.Net.Http.Headers;
 
-namespace Univ.Hi_Student_Affairs
+namespace Univ.Hi_Student_Affairs.Domain.Univ
 {
+
+    public class UnivManager : DomainService
+    {
+        private readonly IRepository<Univ, int> _univRepository;
+        private readonly IRepository<UnivSection, int> _univSectionRepository;
+        private readonly IRepository<Collage, int> _collageRepository;
+        private readonly IRepository<Department, int> _departmentRepository;
+        private readonly IRepository<Branch, int> _branchRepository;
+        private readonly IRepository<StudyPlan, int> _studyPlanRepository;
+
+        public UnivManager(
+            IRepository<Univ, int> univRepository,
+            IRepository<UnivSection, int> univSectionRepository,
+            IRepository<Collage, int> collageRepository,
+            IRepository<Department, int> departmentRepository,
+            IRepository<Branch, int> branchRepository,
+            IRepository<StudyPlan, int> studyPlanRepository)
+        {
+            _univRepository = univRepository;
+            _univSectionRepository = univSectionRepository;
+            _collageRepository = collageRepository;
+            _departmentRepository = departmentRepository;
+            _branchRepository = branchRepository;
+            _studyPlanRepository = studyPlanRepository;
+        }
+
+        public async Task<Univ> CreateUnivAsync(
+            string nameAr, string nameEn, int? ord, string barcode, UnivType univType, ICollection<UnivSection> univSections)
+        {
+            var univ = new Univ(nameAr, nameEn, ord, barcode, univType, univSections);
+            await _univRepository.InsertAsync(univ);
+            return univ;
+        }
+
+        public async Task<Univ> UpdateUnivAsync(
+            int id, string nameAr, string nameEn, int? ord, string barcode, UnivType univType)
+        {
+            var univ = await _univRepository.GetAsync(id);
+
+            univ.UpdateUnivType(univType);
+            // Update other properties here as needed...
+
+            await _univRepository.UpdateAsync(univ);
+            return univ;
+        }
+
+        public async Task<Univ> AddUnivSectionAsync(int univId, string nameAr, string nameEn, int? ord, string barcode)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            var univSection = univ.AddUnivSection(nameAr, nameEn, ord, barcode);
+
+            await _univRepository.UpdateAsync(univ);
+            return univ;
+        }
+
+        public async Task RemoveUnivSectionAsync(int univId, int univSectionId)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            univ.RemoveUnivSection(univSectionId);
+
+            await _univRepository.UpdateAsync(univ);
+        }
+
+        public async Task<UnivSection> AddCollageAsync(
+            int univId, int univSectionId, string nameAr, string nameEn, int? ord, string barcode, string deanAr,
+            string deanEn, int? numYear, Degree degree, string degreeNameAr, string degreeNameEn,
+            ColType colType, ColClassification colClassification, ICollection<Department> departments,
+            ICollection<StudyPlan> studyPlans)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            var univSection = univ.GetUnivSection(univSectionId);
+            univSection = univSection.AddCollage(
+                nameAr, nameEn, ord, barcode, univSectionId, deanAr, deanEn, numYear, degree, degreeNameAr, degreeNameEn, colType, colClassification, departments, studyPlans
+                );
+
+            await _univSectionRepository.UpdateAsync(univSection);
+            return univSection;
+        }
+
+        public async Task RemoveCollageAsync(int univId, int univSectionId, int collageId)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            var univSection = univ.GetUnivSection(univSectionId);
+            univSection.RemoveCollage(collageId);
+
+            await _univSectionRepository.UpdateAsync(univSection);
+        }
+
+        public async Task<Collage> AddDepartmentAsync(
+            int univId, int univSectionId, int collageId, string nameAr, string nameEn, int? ord, string barcode,
+            ICollection<Branch> branches)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            var univSection = univ.GetUnivSection(univSectionId);
+            var collage = univSection.GetCollage(collageId);
+            collage = collage.AddDepartment(nameAr, nameEn, ord, barcode, branches);
+
+            await _collageRepository.UpdateAsync(collage);
+            return collage;
+        }
+
+        public async Task RemoveDepartmentAsync(int univId, int univSectionId, int collageId, int departmentId)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            var univSection = univ.GetUnivSection(univSectionId);
+            var collage = univSection.GetCollage(collageId);
+            collage.RemoveDepartment(departmentId);
+
+            await _collageRepository.UpdateAsync(collage);
+        }
+
+        public async Task<Collage> AddStudyPlanAsync(
+            int univId, int univSectionId, int collageId, string name, int? ord, string description, DateTime fireDate)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            var univSection = univ.GetUnivSection(univSectionId);
+            var collage = univSection.GetCollage(collageId);
+            var studyPlan = collage.AddStudyPlan(name, ord, description, fireDate);
+
+            await _collageRepository.UpdateAsync(collage);
+            return collage;
+        }
+
+        public async Task RemoveStudyPlanAsync(int univId, int univSectionId, int collageId, int studyPlanId)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            var univSection = univ.GetUnivSection(univSectionId);
+            var collage = univSection.GetCollage(collageId);
+            collage.RemoveStudyPlan(studyPlanId);
+
+            await _collageRepository.UpdateAsync(collage);
+        }
+
+        public async Task<Department> AddBranchAsync(
+            int univId, int univSectionId, int collageId, int departmentId, string nameAr, string nameEn, int? ord, string barcode)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            var univSection = univ.GetUnivSection(univSectionId);
+            var collage = univSection.GetCollage(collageId);
+            var department = collage.GetDepartment(departmentId);
+            var branch = department.AddBranch(nameAr, nameEn, ord, barcode);
+
+            await _departmentRepository.UpdateAsync(department);
+            return department;
+        }
+
+        public async Task<Department> UpdateBranchAsync(
+          int univId, int univSectionId, int collageId, int departmentId, int branchId, string nameAr, string nameEn, int? ord, string barcode)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            var univSection = univ.GetUnivSection(univSectionId);
+            var collage = univSection.GetCollage(collageId);
+            var department = collage.GetDepartment(departmentId);
+
+            department = department.UpdateBranch(branchId, nameAr, nameEn, ord, barcode);
+
+            await _departmentRepository.UpdateAsync(department);
+            return department;
+        }
+
+
+        public async Task RemoveBranchAsync(int univId, int univSectionId, int collageId, int departmentId, int branchId)
+        {
+            var univ = await _univRepository.GetAsync(univId);
+            var univSection = univ.GetUnivSection(univSectionId);
+            var collage = univSection.GetCollage(collageId);
+            var department = collage.GetDepartment(departmentId);
+            department.RemoveBranch(branchId);
+
+            await _departmentRepository.UpdateAsync(department);
+        }
+    }
+
+
+    /*
     public class UnivManager : DomainService
     {
 
@@ -25,45 +191,43 @@ namespace Univ.Hi_Student_Affairs
             _Repository = Repository;
         }
 
-        
+        private async Task ValidateUnivAsync(string nameAr, string nameEn, string? barcode, int? id = null)
+        {
+            var existingNameAr = await _Repository.FindAsync(x => x.NameAr == nameAr && (!id.HasValue || x.Id != id));
+            if (existingNameAr != null)
+            {
+                throw new CountryNameArAlreadyExistsException(nameAr);
+            }
+
+            var existingNameEn = await _Repository.FindAsync(x => x.NameEn == nameEn && (!id.HasValue || x.Id != id));
+            if (existingNameEn != null)
+            {
+                throw new CountryNameArAlreadyExistsException(nameEn);
+            }
+
+            var existingBarcode = await _Repository.FindAsync(x => x.Barcode == barcode && (!id.HasValue || x.Id != id));
+            if (existingBarcode != null)
+            {
+                throw new UserFriendlyException("Barcode is exist");
+            }
+        }
+
 
 
         public async Task<Univ> CreateAsync(
-            [NotNull] string NameAr,
-            [NotNull] string NameEn,
-            [CanBeNull] int? Ord,
-            [CanBeNull] int? MinistryEncode = null,
-            [CanBeNull] string? UnivEncode = null,                          
-            [CanBeNull] Collection<UnivSection>? UnivSections = null 
+           string nameAr, string? nameEn, int? ord, string? barcode, UnivType univType, ICollection<UnivSection>? univSections
             )
         {
-            Check.NotNullOrWhiteSpace(NameAr, nameof(NameAr), ContinentConsts.MaxNameArLength, 2);
+            Check.NotNullOrWhiteSpace(nameAr, nameof(nameAr), ContinentConsts.MaxNameArLength, 2);
 
-            Check.NotNullOrWhiteSpace(NameEn, nameof(NameEn), ContinentConsts.MaxNameArLength, 2);
-
-
-
-            var Existing_NameAr = await _Repository.FindAsync(x => x.NameAr == NameAr);
-            if (Existing_NameAr != null)
-            {
-                throw new ContinentNameArAlreadyExistsException(NameAr);
-            }
+            Check.NotNullOrWhiteSpace(nameEn, nameof(nameEn), ContinentConsts.MaxNameArLength, 2);
 
 
-            var Existing_NameEn = await _Repository.FindAsync(x => x.NameEn == NameEn);
-            if (Existing_NameEn != null)
-            {
-                throw new ContinentNameEnAlreadyExistsException(NameEn);
-            }
+            await ValidateUnivAsync(nameAr, nameEn, barcode);
 
 
-            var @Univ =  new Univ(               
-                NameAr,
-                NameEn,
-                Ord,
-                MinistryEncode,
-                UnivEncode,
-                null 
+                        var @Univ =  new Univ(
+                nameAr, nameEn, ord, barcode, univType, null
             );
 
             return @Univ;
@@ -73,60 +237,53 @@ namespace Univ.Hi_Student_Affairs
        
         public async Task<Univ> UpdateAsync(
             [NotNull] int id,
-            [NotNull] Univ input
+            string nameAr, string? nameEn, int? ord, string? barcode, UnivType univType, ICollection<UnivSection>? univSections
             )
         {
-            Check.NotNullOrWhiteSpace(input.NameAr, nameof(input.NameAr));
-            Check.NotNullOrWhiteSpace(input.NameEn, nameof(input.NameEn));
+            Check.NotNullOrWhiteSpace(nameAr, nameof(nameAr));
+            
+
+
+            await ValidateUnivAsync(nameAr, nameEn, barcode, id);
 
 
             var Old = await _Repository.FindAsync(x => x.Id == id);
             if (Old == null)
             {
-                throw new ContinentNotExistsException();
+                throw new System.Exception();
             }
 
-            var Existing_NameAr = await _Repository.FindAsync(x => x.NameAr == input.NameAr && x.Id != id);
-            if (Existing_NameAr != null)
-            {
-                throw new ContinentNameArAlreadyExistsException(input.NameAr);
-            }
+            
 
 
-            var Existing_NameEn = await _Repository.FindAsync(x => x.NameEn == input.NameEn && x.Id != id);
-            if (Existing_NameEn != null)
-            {
-                throw new ContinentNameEnAlreadyExistsException(input.NameEn);
-            }
+            Old.SetNameAr(nameAr);
+            Old.SetNameEn(nameEn);
+            Old.SetBarcode(barcode);
+            Old.SetOrd(ord);
+         
 
-
-
-            Old.NameAr = input.NameAr;
-            Old.NameEn = input.NameEn;
-            Old.Ord = input.Ord;
-            Old.Barcode = input.Barcode;
-            Old.MinistryEncode = input.MinistryEncode;
+          
 
             return Old;
         }
 
 
 
-        /*  UnivSection  */
+     
         public void AddUnivSection(Univ @Univ,
-         string name_ar, string name_en, int? ord, int? ministry_encode, string? barcode, Collection<Collage>? collages
+         string nameAr, string nameEn, int? ord, string? barcode
          )
         {
-            @Univ.AddUnivSection(name_ar, name_en, ord, ministry_encode, barcode, collages);
+            @Univ.AddUnivSection(nameAr, nameEn, ord, barcode);
         }
 
 
         public void UpdateUnivSection(
             Univ @Univ,
             int UnivSectionId,
-                 string name_ar, string name_en, int? ord, int? ministry_encode, string? barcode, Collection<Collage>? collages)
+                   string nameAr, string nameEn, int? ord, string? barcode)
         {
-            @Univ.UpdateUnivSection(UnivSectionId, name_ar, name_en, ord, ministry_encode, barcode, collages);
+            @Univ.UpdateUnivSection(UnivSectionId, nameAr, nameEn, ord, barcode);
         }
 
 
@@ -140,7 +297,7 @@ namespace Univ.Hi_Student_Affairs
 
 
 
-        /*  Collage  */
+       
         public void AddCollage(
             Univ @Univ,
             int UnivSectionId,
@@ -222,7 +379,7 @@ namespace Univ.Hi_Student_Affairs
 
 
 
-        /*  Department  */
+     
         public void AddDepartment(
               Univ @Univ,
               int UnivSectionId,
@@ -292,7 +449,7 @@ namespace Univ.Hi_Student_Affairs
         }
 
 
-        /*  Branch  */
+        
         public void AddBranch(
               Univ @Univ,
               int UnivSectionId,
@@ -361,4 +518,5 @@ namespace Univ.Hi_Student_Affairs
 
 
     }
+    */
 }

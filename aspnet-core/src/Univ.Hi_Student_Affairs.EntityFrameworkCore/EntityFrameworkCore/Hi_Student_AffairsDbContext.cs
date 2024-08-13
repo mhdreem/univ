@@ -1,5 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Univ.Hi_Student_Affairs.Domain;
+using Univ.Hi_Student_Affairs.Domain.Country;
+using Univ.Hi_Student_Affairs.Domain.StdAbsence;
+using Univ.Hi_Student_Affairs.Domain.StdAdmission;
+using Univ.Hi_Student_Affairs.Domain.StdAffiliation;
+using Univ.Hi_Student_Affairs.Domain.StdCertificate;
+using Univ.Hi_Student_Affairs.Domain.StdChangeCollage;
+using Univ.Hi_Student_Affairs.Domain.StdInstitute;
+using Univ.Hi_Student_Affairs.Domain.StdLife;
+using Univ.Hi_Student_Affairs.Domain.StdPunishment;
+using Univ.Hi_Student_Affairs.Domain.StdRegistration;
+using Univ.Hi_Student_Affairs.Domain.StdSeqStudy;
+using Univ.Hi_Student_Affairs.Domain.StdSymTransform;
+using Univ.Hi_Student_Affairs.Domain.StdTermination;
+using Univ.Hi_Student_Affairs.Domain.Student;
+using Univ.Hi_Student_Affairs.Domain.Student.Admission;
+using Univ.Hi_Student_Affairs.Domain.TypeLic;
+using Univ.Hi_Student_Affairs.Domain.Univ;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -54,75 +71,73 @@ public class Hi_Student_AffairsDbContext :
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
 
+    //القبول الجامعي
     public DbSet<Admission> Admissions { get; set; }
-    public DbSet<AdmissionKind> Admission_Kinds { get; set; }
-    public DbSet<FeeCalcType> Fee_Calc_Types { get; set; }
+    //الشهادات
     public DbSet<TypeLic> Type_Lics { get; set; }
+    //فروع الشهادات
     public DbSet<TypeLicBranch> Type_Lic_Branchs { get; set; }
+    //المدن
     public DbSet<City> Cities { get; set; }
-    public DbSet<Continent> Continents { get; set; }
+    //الدول
     public DbSet<Country> Countries { get; set; }
+    //نوع الهويات
     public DbSet<IdentifierType> Identifier_Types { get; set; }
-    public DbSet<Language> Languages { get; set; }
-    public DbSet<Nationality> Nationalities { get; set; }
+    //الفصول الدراسية
     public DbSet<Semester> Semesters { get; set; }
+    //الاختصاص من القسم
     public DbSet<Branch> Branchs { get; set; }
+    //السنوات الدراسية
     public DbSet<Class> Classes { get; set; }
-    public DbSet<CollType> Coll_Types { get; set; }
+    //الكليات
     public DbSet<Collage> Collages { get; set; }
+    //الاقسام
     public DbSet<Department> Departments { get; set; }
-    public DbSet<Univ> Univs { get; set; }
+    public DbSet<Univ.Hi_Student_Affairs.Domain.Univ.Univ> Univs { get; set; }
     public DbSet<UnivSection> Univ_Sections { get; set; }
-    public DbSet<UnivType> Univ_Types { get; set; }
+
 
     public DbSet<Student> Students { get; set; }
     public DbSet<StdSeqSum> StdSeqSums { get; set; }
     public DbSet<StdSeqStudy> StdSeqStudies { get; set; }
 
-  
-   
-    public DbSet<StdPhoto> StdPhotos { get; set; }
+
+
+    //الحياة الجامعية
     public DbSet<StdLife> StdLifes { get; set; }
-
+    //الشهادات الثانوية
     public DbSet<StdCertificate> StdCertificates { get; set; }
+    //القبولات الجامعية
     public DbSet<StdAdmission> StdAdmissions { get; set; }
-  
-    public DbSet<Status> Statuses { get; set; }
 
-    public DbSet<Deprivation> Deprivations { get; set; }
 
-    public DbSet<Operation> Operations { get; set; }
 
-    public DbSet<Ministry> Ministries { get; set; }
+
+    //شعب التجنيد
     public DbSet<Military> Militaries { get; set; }
-    public DbSet<Degree> Degrees { get; set; }
 
+
+    //شعب النفوس بكل محافظة
     public DbSet<CivilReg> CivilRegs { get; set; }
-   
-
-
-
-
-
-    public DbSet<SeqStatus> SeqStatuses { get; set; }
-    public DbSet<SeqResult> SeqResults { get; set; }
-
-
-
-
-    public DbSet<StdLife>? StdLife { get; set; }
-
 
 
 
     //العقوبات
+    //سبب العقوبة
     public DbSet<PunishmentReason> PunishmentReasons { get; set; }
+    //العقوبة
     public DbSet<Punishment> Punishments { get; set; }
+    //مراحل العقوبة
     public DbSet<PunishmentStage> PunishmentStages { get; set; }
-
+    //مراحل العقوبة التي اخذها الطالب
     public DbSet<StdPunishmentStage> StdPunishmentStages { get; set; }
+    //عقوبات الطلاب
     public DbSet<StdPunishment> StdPunishments { get; set; }
+    //إلغاء العقوبة
     public DbSet<StdAbolition> StdAbolitions { get; set; }
+    //الحرمات
+    public DbSet<Deprivation> Deprivations { get; set; }
+
 
 
     //تسجيل
@@ -208,17 +223,7 @@ public class Hi_Student_AffairsDbContext :
             b.ConfigureByConvention(); //auto configure for the base class props           
         });
 
-        builder.Entity<AdmissionKind>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "AdmissionKind", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
 
-        builder.Entity<FeeCalcType>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "FeeCalcType", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
 
         builder.Entity<TypeLic>(b =>
         {
@@ -226,11 +231,7 @@ public class Hi_Student_AffairsDbContext :
             b.ConfigureByConvention(); //auto configure for the base class props           
         });
 
-        builder.Entity<Operation>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Operation", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
+
 
         builder.Entity<TypeLicBranch>(b =>
         {
@@ -242,28 +243,14 @@ public class Hi_Student_AffairsDbContext :
         {
             b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "City", Hi_Student_AffairsConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props           
-
             b.Property(x => x.NameAr).IsRequired().HasMaxLength(256);
             b.Property(x => x.NameEn).IsRequired().HasMaxLength(256);
-           // b.HasOne<Country>().WithMany().HasForeignKey(x => x.CountryId).IsRequired();
+            // b.HasOne<Country>().WithMany().HasForeignKey(x => x.CountryId).IsRequired();
 
         });
 
 
-        builder.Entity<Continent>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Continent", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-            b.Property(x => x.NameAr).IsRequired().HasMaxLength(256);
-            b.Property(x => x.NameEn).IsRequired().HasMaxLength(256);
-            //Define the relation
-            b.HasMany(x => x.Countries)
-                .WithOne(x => x.Continent)
-                .HasForeignKey(x => x.ContinentId)
-                .IsRequired();
 
-
-        });
 
         builder.Entity<Country>(b =>
         {
@@ -273,12 +260,7 @@ public class Hi_Student_AffairsDbContext :
             b.Property(x => x.NameAr).IsRequired().HasMaxLength(256);
             b.Property(x => x.NameEn).IsRequired().HasMaxLength(256);
 
-            b.HasMany(x => x.Cities)
-              .WithOne(x => x.Country)
-              .HasForeignKey(x => x.CountryId)
-              .IsRequired();
 
-            // b.HasOne<Continent>().WithMany().HasForeignKey(x => x.ContinentId).IsRequired();
         });
 
         builder.Entity<IdentifierType>(b =>
@@ -288,17 +270,7 @@ public class Hi_Student_AffairsDbContext :
         });
 
 
-        builder.Entity<Language>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Language", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
 
-        builder.Entity<Nationality>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Nationality", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
 
 
         builder.Entity<Semester>(b =>
@@ -307,7 +279,7 @@ public class Hi_Student_AffairsDbContext :
             b.ConfigureByConvention(); //auto configure for the base class props           
         });
 
-        builder.Entity<Univ>(b =>
+        builder.Entity<Univ.Hi_Student_Affairs.Domain.Univ.Univ>(b =>
         {
             b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Univ", Hi_Student_AffairsConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props           
@@ -315,10 +287,7 @@ public class Hi_Student_AffairsDbContext :
             b.Property(x => x.NameAr).IsRequired().HasMaxLength(256);
             b.Property(x => x.NameEn).IsRequired().HasMaxLength(256);
 
-            b.HasMany(x => x.UnivSections)
-              .WithOne(x => x.Univ)
-              .HasForeignKey(x => x.UnivId)
-              .IsRequired();
+
         });
 
         builder.Entity<UnivSection>(b =>
@@ -329,24 +298,10 @@ public class Hi_Student_AffairsDbContext :
             b.Property(x => x.NameAr).IsRequired().HasMaxLength(256);
             b.Property(x => x.NameEn).IsRequired().HasMaxLength(256);
 
-            b.HasMany(x => x.Collages)
-              .WithOne(x => x.UnivSection)
-              .HasForeignKey(x => x.UnivSectionId)
-              .IsRequired();
 
         });
 
-        builder.Entity<UnivType>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "UnivType", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
 
-            b.Property(x => x.NameAr).IsRequired().HasMaxLength(256);
-            b.Property(x => x.NameEn).IsRequired().HasMaxLength(256);
-
-            
-
-        });
         builder.Entity<Collage>(b =>
         {
             b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Collage", Hi_Student_AffairsConsts.DbSchema);
@@ -356,10 +311,7 @@ public class Hi_Student_AffairsDbContext :
             b.Property(x => x.NameAr).IsRequired().HasMaxLength(256);
             b.Property(x => x.NameEn).IsRequired().HasMaxLength(256);
 
-            b.HasMany(x => x.Departments)
-              .WithOne(x => x.Collage)
-              .HasForeignKey(x => x.CollageId)
-              .IsRequired();
+
 
         });
 
@@ -371,10 +323,7 @@ public class Hi_Student_AffairsDbContext :
             b.Property(x => x.NameAr).IsRequired().HasMaxLength(256);
             b.Property(x => x.NameEn).IsRequired().HasMaxLength(256);
 
-            b.HasMany(x => x.Branchs)
-              .WithOne(x => x.Department)
-              .HasForeignKey(x => x.DepartmentId)
-              .IsRequired();
+
 
         });
 
@@ -391,19 +340,6 @@ public class Hi_Student_AffairsDbContext :
             b.ConfigureByConvention(); //auto configure for the base class props           
         });
 
-        builder.Entity<CollType>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "CollType", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
-
-
-        builder.Entity<SubExamStatus>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "SubExamStatus", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
-
 
         builder.Entity<CivilReg>(b =>
         {
@@ -412,27 +348,13 @@ public class Hi_Student_AffairsDbContext :
         });
 
 
-        builder.Entity<Degree>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Degree", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
 
-
-        builder.Entity<Ministry>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Ministry", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
 
         builder.Entity<Deprivation>(b =>
         {
             b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Deprivation", Hi_Student_AffairsConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props           
         });
-
-
-      
 
 
         builder.Entity<Punishment>(b =>
@@ -448,7 +370,7 @@ public class Hi_Student_AffairsDbContext :
             b.ConfigureByConvention(); //auto configure for the base class props           
         });
 
-     
+
 
         builder.Entity<PunishmentReason>(b =>
         {
@@ -457,18 +379,6 @@ public class Hi_Student_AffairsDbContext :
         });
 
 
-        builder.Entity<Status>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Status", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
-
-
-        builder.Entity<SeqStatus>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "SeqStatus", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
 
 
         builder.Entity<Military>(b =>
@@ -476,28 +386,78 @@ public class Hi_Student_AffairsDbContext :
             b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "Military", Hi_Student_AffairsConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props           
         });
-        
 
 
-        builder.Entity<SeqResult>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "SeqResult", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
 
 
-        
+
+
 
         builder.Entity<StdSeqSum>(b =>
         {
             b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "StdSeqSum", Hi_Student_AffairsConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props           
+
+
+            // Configuring StudentProfile as an owned entity
+            b.OwnsOne(s => s.UniveInfo, profile =>
+            {
+                profile.Property(o => o.UnivId)
+                  .HasColumnName("UnivId");
+                profile.Property(o => o.UnivSectionId)
+                  .HasColumnName("UnivSectionId");
+                profile.Property(o => o.CollageId)
+                  .HasColumnName("CollageId");
+                profile.Property(o => o.DepartmentId)
+                  .HasColumnName("DepartmentId");
+                profile.Property(o => o.SemesterId)
+                  .HasColumnName("SemesterId");
+                profile.Property(o => o.BranchId)
+                  .HasColumnName("BranchId");
+                profile.Property(o => o.ClassId)
+                  .HasColumnName("ClassId");
+                profile.Property(o => o.AdmissionId)
+                  .HasColumnName("AdmissionId");
+
+
+
+
+
+            });
+
         });
 
         builder.Entity<StdSeqStudy>(b =>
         {
             b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "StdSeqStudy", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
+            b.ConfigureByConvention(); //auto configure for the base class props
+                                       //
+
+            // Configuring StudentProfile as an owned entity
+            b.OwnsOne(s => s.UniveInfo, profile =>
+            {
+                profile.Property(o => o.UnivId)
+                  .HasColumnName("UnivId");
+                profile.Property(o => o.UnivSectionId)
+                  .HasColumnName("UnivSectionId");
+                profile.Property(o => o.CollageId)
+                  .HasColumnName("CollageId");
+                profile.Property(o => o.DepartmentId)
+                  .HasColumnName("DepartmentId");
+                profile.Property(o => o.SemesterId)
+                  .HasColumnName("SemesterId");
+                profile.Property(o => o.BranchId)
+                  .HasColumnName("BranchId");
+                profile.Property(o => o.ClassId)
+                  .HasColumnName("ClassId");
+                profile.Property(o => o.AdmissionId)
+                  .HasColumnName("AdmissionId");
+
+
+
+
+
+            });
         });
 
         builder.Entity<StdRegistration>(b =>
@@ -536,11 +496,7 @@ public class Hi_Student_AffairsDbContext :
         });
 
 
-        builder.Entity<StdPhoto>(b =>
-        {
-            b.ToTable(Hi_Student_AffairsConsts.DbTablePrefix + "StdPhoto", Hi_Student_AffairsConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props           
-        });
+
 
 
         builder.Entity<PunishmentStage>(b =>
@@ -556,7 +512,7 @@ public class Hi_Student_AffairsDbContext :
             b.ConfigureByConvention(); //auto configure for the base class props           
         });
 
-      
+
 
 
         builder.Entity<StdRegistration>(b =>
@@ -712,74 +668,99 @@ public class Hi_Student_AffairsDbContext :
             b.ConfigureByConvention(); //auto configure for the base class props           
 
 
-            b.HasMany(x => x.StdAdmissions)
-           .WithOne(x => x.Student)
-           .HasForeignKey(x => x.StudentId)
-           .IsRequired();
+            // Configuring StudentProfile as an owned entity
+            b.OwnsOne(s => s.studnetProfile, profile =>
+            {
+                // Configuring nested complex properties if necessary
+                profile.Property(p => p.FirstNameAR).HasMaxLength(250);
+                profile.Property(p => p.LastNameAr).HasMaxLength(250);
+                profile.Property(p => p.FatherNameAr).HasMaxLength(250);
+                profile.Property(p => p.MotherNameAr).HasMaxLength(250);
+                profile.Property(p => p.Identifier).HasMaxLength(250);
+
+                // Continue configuring other properties as needed
+
+                profile.Property(o => o.FirstNameAR)
+                .HasColumnName("FirstNameAR");
+                profile.Property(o => o.LastNameAr)
+                 .HasColumnName("LastNameAr");
+                profile.Property(o => o.FatherNameAr)
+                 .HasColumnName("FatherNameAr");
+                profile.Property(o => o.MotherNameAr)
+                .HasColumnName("MotherNameAr");
+                profile.Property(o => o.Identifier)
+               .HasColumnName("Identifier");
+                profile.Property(o => o.IdentifierTypeId)
+                 .HasColumnName("IdentifierTypeId");
+                profile.Property(o => o.Jender)
+               .HasColumnName("Jender");
+                profile.Property(o => o.CountryId)
+                .HasColumnName("CountryId");
+                profile.Property(o => o.DayBirth)
+                .HasColumnName("DayBirth");
+                profile.Property(o => o.MonthBirth)
+                .HasColumnName("MonthBirth");
+                profile.Property(o => o.YearBirth)
+                .HasColumnName("YearBirth");
+                profile.Property(o => o.Nationality)
+                .HasColumnName("Nationality");
+                profile.Property(o => o.FirstNameEn)
+                .HasColumnName("FirstNameEn");
+                profile.Property(o => o.LastNameEn)
+                .HasColumnName("LastNameEn");
+                profile.Property(o => o.MotherNameEn)
+                .HasColumnName("MotherNameEn");
+                profile.Property(o => o.FatherNameEn)
+                .HasColumnName("FatherNameEn"); ;
+
+                // Ensure the Enum is stored as a byte
+                profile.Property(e => e.Jender)
+                 .HasConversion<byte>();
 
 
 
-            b.HasMany(x => x.StdCertificates)
-           .WithOne(x => x.Student)
-           .HasForeignKey(x => x.StudentId)
-           .IsRequired();
+
+            });
 
 
-            b.HasMany(x => x.StdRegistrations)
-            .WithOne(x => x.Student)
-            .HasForeignKey(x => x.StudentId)
-            .IsRequired();
+            // Configuring StudentProfile as an owned entity
+            b.OwnsOne(s => s.StdNo, profile =>
+            {
+                profile.Property(o => o.StdMinistryId)
+                 .HasColumnName("StdMinistryId");
+                profile.Property(o => o.ExamCollageId)
+                 .HasColumnName("ExamCollageId");
+                profile.Property(o => o.StdCollageId)
+                 .HasColumnName("StdCollageId");
 
-            b.HasMany(x => x.StdPunishments)
-            .WithOne(x => x.Student)
-            .HasForeignKey(x => x.StudentId)
-            .IsRequired();
+                // Continue configuring other properties as needed
+            });
 
-            b.HasMany(x => x.StdSeqStudies)
-            .WithOne(x => x.Student)
-            .HasForeignKey(x => x.StudentId)
-            .IsRequired();
-
-            b.HasMany(x => x.StdLife)
-            .WithOne(x => x.Student)
-            .HasForeignKey(x => x.StudentId)
-            .IsRequired();
-
-
-            b.HasMany(x => x.StdAbsences)
-            .WithOne(x => x.Student)
-            .HasForeignKey(x => x.StudentId)
-            .IsRequired();
-
-            b.HasMany(x => x.StdAffiliations)
-            .WithOne(x => x.Student)
-            .HasForeignKey(x => x.StudentId)
-            .IsRequired();
-
-
-            b.HasMany(x => x.StdChangeCollages)
-            .WithOne(x => x.Student)
-            .HasForeignKey(x => x.StudentId)
-            .IsRequired();
-
-            b.HasMany(x => x.StdNonSyrianUnives)
-            .WithOne(x => x.Student)
-            .HasForeignKey(x => x.StudentId)
-            .IsRequired();
+            // Configuring StudentProfile as an owned entity
+            b.OwnsOne(s => s.UniveInfo, profile =>
+            {
+                profile.Property(o => o.UnivId)
+                  .HasColumnName("UnivId");
+                profile.Property(o => o.UnivSectionId)
+                  .HasColumnName("UnivSectionId");
+                profile.Property(o => o.CollageId)
+                  .HasColumnName("CollageId");
+                profile.Property(o => o.DepartmentId)
+                  .HasColumnName("DepartmentId");
+                profile.Property(o => o.SemesterId)
+                  .HasColumnName("SemesterId");
+                profile.Property(o => o.BranchId)
+                  .HasColumnName("BranchId");
+                profile.Property(o => o.ClassId)
+                  .HasColumnName("ClassId");
+                profile.Property(o => o.AdmissionId)
+                  .HasColumnName("AdmissionId");
 
 
-            b.HasMany(x => x.StdRegistrations)
-            .WithOne(x => x.Student)
-            .HasForeignKey(x => x.StudentId)
-            .IsRequired();
 
 
-            b.HasMany(x => x.StdTerminations)
-            .WithOne(x => x.Student)
-            .HasForeignKey(x => x.StudentId)
-            .IsRequired();
 
-
+            });
         });
 
 

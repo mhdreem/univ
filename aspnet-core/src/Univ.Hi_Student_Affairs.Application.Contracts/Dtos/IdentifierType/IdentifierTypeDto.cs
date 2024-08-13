@@ -1,15 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.IdentifierType
 {
 
     public class IdentifierTypeDto : EntityDto<int>
     {
-     
+
 
         //اسم نوع الهوية
 
@@ -22,7 +18,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.IdentifierType
 
     }
 
-    public class CreateIdentifierTypeDto 
+    public class CreateIdentifierTypeDto
     {
 
 
@@ -42,7 +38,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.IdentifierType
         public int Id { get; set; }
     }
 
-    public class CheckIdentifierTypeDto:EntityDto<int?>
+    public class CheckIdentifierTypeDto : EntityDto<int?>
     {
         public int? id { get; set; }
         //اسم نوع الهوية

@@ -1,6 +1,4 @@
-﻿using System;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Nationality
 {
@@ -33,7 +31,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Nationality
 
     }
 
-    public class CreateNationalityDto 
+    public class CreateNationalityDto
     {
 
         //اسم الجنسية
@@ -63,7 +61,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Nationality
 
     public class UpdateNationalityDto : CreateNationalityDto
     {
-        public int Id{ get; set; }
+        public int Id { get; set; }
     }
 
     public class CheckNationalityDto

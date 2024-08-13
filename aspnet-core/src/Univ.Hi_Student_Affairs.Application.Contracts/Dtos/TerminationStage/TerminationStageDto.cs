@@ -1,12 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.TerminationStage
 {
     public class TerminationStageDto : EntityDto<int>
     {
-      
+
         public string? Name { get; set; }
 
         public StageState? StageState { get; set; }
@@ -14,7 +12,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.TerminationStage
         public int? Ord { get; set; }
     }
 
-    public class CreateTerminationStageDto 
+    public class CreateTerminationStageDto
     {
 
         public string? Name { get; set; }
@@ -24,13 +22,13 @@ namespace Univ.Hi_Student_Affairs.Dtos.TerminationStage
         public int? Ord { get; set; }
     }
 
-    public class UpdateTerminationStageDto: CreateTerminationStageDto
+    public class UpdateTerminationStageDto : CreateTerminationStageDto
     {
         public int Id { get; set; }
     }
 
 
-    public class CheckTerminationStageDto:EntityDto<int?>
+    public class CheckTerminationStageDto : EntityDto<int?>
     {
 
         public string? Name { get; set; }

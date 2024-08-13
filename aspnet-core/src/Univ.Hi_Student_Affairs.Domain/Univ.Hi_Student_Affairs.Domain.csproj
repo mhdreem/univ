@@ -9,26 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Domain\Admission\IAdmissionRepository.cs" />
-    <Compile Remove="Domain\Univ\Branch\BranchFilter.cs" />
-    <Compile Remove="Domain\Univ\Branch\BranchManager.cs" />
-    <Compile Remove="Domain\Univ\Branch\Exception\AverageCalcNameAlreadyExistsException.cs" />
-    <Compile Remove="Domain\Univ\Branch\Exception\AverageCalcNotExistsException.cs" />
-    <Compile Remove="Domain\Univ\Collage\Exception\AverageCalcNameAlreadyExistsException.cs" />
-    <Compile Remove="Domain\Univ\Collage\Exception\AverageCalcNotExistsException.cs" />
-    <Compile Remove="Domain\CollType\Exception\AverageCalcNameAlreadyExistsException.cs" />
-    <Compile Remove="Domain\CollType\Exception\AverageCalcNotExistsException.cs" />
-    <Compile Remove="Domain\Univ\Department\Exception\AverageCalcNameAlreadyExistsException.cs" />
-    <Compile Remove="Domain\Univ\Department\Exception\AverageCalcNotExistsException.cs" />
     <Compile Remove="Domain\Univ\Exception\AverageCalcNameAlreadyExistsException.cs" />
     <Compile Remove="Domain\Univ\Exception\AverageCalcNotExistsException.cs" />
-    <Compile Remove="Domain\Univ\UnivSection\Exception\AverageCalcNameAlreadyExistsException.cs" />
-    <Compile Remove="Domain\Univ\UnivSection\Exception\AverageCalcNotExistsException.cs" />
-    <Compile Remove="Domain\UnivType\Exception\AverageCalcNameAlreadyExistsException.cs" />
-    <Compile Remove="Domain\UnivType\Exception\AverageCalcNotExistsException.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Univ.Hi_Student_Affairs.Application.Contracts\Univ.Hi_Student_Affairs.Application.Contracts.csproj" />
     <ProjectReference Include="..\Univ.Hi_Student_Affairs.Domain.Shared\Univ.Hi_Student_Affairs.Domain.Shared.csproj" />
   </ItemGroup>
 
@@ -46,11 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Univ\Branch\Exception\" />
-    <Folder Include="Domain\Univ\Collage\Exception\" />
-    <Folder Include="Domain\Univ\Department\Exception\" />
     <Folder Include="Domain\Univ\Exception\" />
-    <Folder Include="Domain\Univ\UnivSection\Exception\" />
     <Folder Include="StdTermination\" />
   </ItemGroup>
 

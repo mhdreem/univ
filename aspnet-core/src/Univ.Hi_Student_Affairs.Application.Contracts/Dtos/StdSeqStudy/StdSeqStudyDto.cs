@@ -22,25 +22,25 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdSeqStudy
 
         //الكلية
         public int? UnivId { get; set; }
-        
+
         public virtual UnivDto? Univ { get; set; }
 
 
         //الكلية
         public int? UnivSectionId { get; set; }
-        
+
         public virtual UnivSectionDto? UnivSection { get; set; }
 
 
         //الكلية
         public int? CollageId { get; set; }
-        
+
         public virtual CollageDto? Collage { get; set; }
 
 
         //الاختصاص
         public int? DepartmentId { get; set; }
-        
+
         public virtual DepartmentDto? Department { get; set; }
 
 
@@ -48,7 +48,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdSeqStudy
 
         //القسم
         public int? BranchId { get; set; }
-        
+
         public virtual BranchDto? Branch { get; set; }
 
 
@@ -59,7 +59,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdSeqStudy
 
         //الفصل الحالي
         public int? SemesterId { get; set; }
-        
+
         public virtual SemesterDto? Semester { get; set; }
 
 
@@ -67,14 +67,14 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdSeqStudy
 
         //الحالة
         public int? StatusId { get; set; }
-        
+
         public virtual StatusDto? Status { get; set; }
 
 
 
         //منيجة الطالب
         public int? SeqResultId { get; set; }
-    
+
         public virtual SeqResultDto? SeqResult { get; set; }
 
 

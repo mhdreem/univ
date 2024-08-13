@@ -1,5 +1,4 @@
-﻿using Univ.Hi_Student_Affairs.EntityFrameworkCore;
-using Xunit;
+﻿using Xunit;
 
 namespace Univ.Hi_Student_Affairs.EntityFrameworkCore;
 

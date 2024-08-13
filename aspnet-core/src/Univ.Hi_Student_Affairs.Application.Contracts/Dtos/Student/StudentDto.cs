@@ -5,22 +5,21 @@ using System.ComponentModel.DataAnnotations;
 using Univ.Hi_Student_Affairs.Dtos.Admission;
 using Univ.Hi_Student_Affairs.Dtos.CivilReg;
 using Univ.Hi_Student_Affairs.Dtos.Class;
-using Univ.Hi_Student_Affairs.Dtos.Continent;
+using Univ.Hi_Student_Affairs.Dtos.DomainPunishment;
 using Univ.Hi_Student_Affairs.Dtos.IdentifierType;
-using Univ.Hi_Student_Affairs.Dtos.Jender;
 using Univ.Hi_Student_Affairs.Dtos.Military;
 using Univ.Hi_Student_Affairs.Dtos.Nationality;
 using Univ.Hi_Student_Affairs.Dtos.Semester;
 using Univ.Hi_Student_Affairs.Dtos.Status;
 using Univ.Hi_Student_Affairs.Dtos.StdAbsence;
 using Univ.Hi_Student_Affairs.Dtos.StdAdmission;
+using Univ.Hi_Student_Affairs.Dtos.StdAffiliation;
 using Univ.Hi_Student_Affairs.Dtos.StdCertificate;
 using Univ.Hi_Student_Affairs.Dtos.StdChangeCollage;
 using Univ.Hi_Student_Affairs.Dtos.StdInstitute;
 using Univ.Hi_Student_Affairs.Dtos.StdLife;
 using Univ.Hi_Student_Affairs.Dtos.StdNonSyrianUniv;
 using Univ.Hi_Student_Affairs.Dtos.StdPhoto;
-using Univ.Hi_Student_Affairs.Dtos.StdPunishment;
 using Univ.Hi_Student_Affairs.Dtos.StdRegistration;
 using Univ.Hi_Student_Affairs.Dtos.StdSeqStudy;
 using Univ.Hi_Student_Affairs.Dtos.StdSeqSum;
@@ -42,19 +41,19 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
 
         //الرقم الامتحاني
-        public string? ExamCollageId { get; set; }
+        public ulong? ExamCollageId { get; set; }
 
 
 
         //بلد الولادة
-        
+
         public int? CountryId { get; set; }
-        public virtual CountryDto? Country { get; set; }
+
 
 
 
         //الجنسية
-        
+
         public int? NationalityId { get; set; }
         public virtual NationalityDto? Nationality { get; set; }
 
@@ -100,14 +99,13 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
 
         //الجنس
-        public int? JenderId { get; set; }
-        
-        public virtual JenderDto? Jender { get; set; }
+        public Jender? Jender { get; set; }
+
 
 
 
         //شعبة التجنيد
-     
+
         public int? MilitaryId { get; set; }
         public virtual MilitaryDto? Military { get; set; }
 
@@ -140,7 +138,7 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
         //قيد النفوس
 
-      
+
         public string? CivilRegId { get; set; }
         public virtual CivilRegDto? CivilReg { get; set; }
 
@@ -159,9 +157,9 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
 
         //محافظة الولادة
-        
+
         public int? CityBirthId { get; set; }
-        public virtual CityDto? CityBirth { get; set; }
+
 
 
 
@@ -179,7 +177,7 @@ namespace Univ.Hi_Student_Affairs.Dtos
         public bool? IsArab { get; set; }
 
 
-       
+
         public Guid? StdPhotoId { get; set; }
         public virtual StdPhotoDto? StdPhoto { get; set; }
 
@@ -189,7 +187,7 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
 
         //نوع القبول
-       
+
         public int? AdmissionId { get; set; }
         public virtual AdmissionDto? Admission { get; set; }
 
@@ -197,13 +195,13 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
         //الكلية
         public int? UnivId { get; set; }
-      
+
         public virtual UnivDto? Univ { get; set; }
 
 
         //الكلية
         public int? UnivSectionId { get; set; }
-       
+
         public virtual UnivSectionDto? UnivSection { get; set; }
 
 
@@ -216,7 +214,7 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
         //الاختصاص
         public int? DepartmentId { get; set; }
-   
+
         public virtual DepartmentDto? Department { get; set; }
 
 
@@ -224,26 +222,26 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
         //القسم
         public int? BranchId { get; set; }
-   
+
         public virtual BranchDto? Branch { get; set; }
 
 
         //السنة الدراسية الحالية
         public int? ClassId { get; set; }
- 
+
         public virtual ClassDto? Class { get; set; }
 
 
 
         //الحالة
         public int? StatusId { get; set; }
-       
+
         public virtual StatusDto? Status { get; set; }
 
 
         //الفصل الحالي
         public int? SemesterId { get; set; }
-       
+
         public virtual SemesterDto? Semester { get; set; }
 
 
@@ -255,7 +253,7 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
         //نظام الطالب
         public int? StudyPlanId { get; set; }
-      
+
         public virtual StudyPlanDto? StudyPlan { get; set; }
 
 
@@ -315,7 +313,7 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
     }
 
-    public class CreateStudentDto 
+    public class CreateStudentDto
     {
         //الرقم الوزاري
         public ulong? StdMinistryId { get; set; }
@@ -325,14 +323,14 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
 
         //الرقم الامتحاني
-        public string? ExamCollageId { get; set; }
+        public ulong? ExamCollageId { get; set; }
 
 
 
         //بلد الولادة
 
         public int? CountryId { get; set; }
-        public virtual CountryDto? Country { get; set; }
+
 
 
 
@@ -383,9 +381,9 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
 
         //الجنس
-        public int? JenderId { get; set; }
 
-        public virtual JenderDto? Jender { get; set; }
+
+        public Jender? Jender { get; set; }
 
 
 
@@ -444,7 +442,7 @@ namespace Univ.Hi_Student_Affairs.Dtos
         //محافظة الولادة
 
         public int? CityBirthId { get; set; }
-        public virtual CityDto? CityBirth { get; set; }
+
 
 
 
@@ -561,7 +559,7 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
     public class UpdateStudentDto : CreateStudentDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 
 
@@ -575,14 +573,14 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
 
         //الرقم الامتحاني
-        public string? ExamCollageId { get; set; }
+        public ulong? ExamCollageId { get; set; }
 
 
 
         //بلد الولادة
 
         public int? CountryId { get; set; }
-        public virtual CountryDto? Country { get; set; }
+
 
 
 
@@ -633,9 +631,9 @@ namespace Univ.Hi_Student_Affairs.Dtos
 
 
         //الجنس
-        public int? JenderId { get; set; }
 
-        public virtual JenderDto? Jender { get; set; }
+
+        public Jender? Jender { get; set; }
 
 
 
@@ -694,7 +692,7 @@ namespace Univ.Hi_Student_Affairs.Dtos
         //محافظة الولادة
 
         public int? CityBirthId { get; set; }
-        public virtual CityDto? CityBirth { get; set; }
+
 
 
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Univ
 {
@@ -37,7 +33,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
     }
 
 
-    public class CreateBranchDto 
+    public class CreateBranchDto
     {
 
         public int? UnivId { get; set; }

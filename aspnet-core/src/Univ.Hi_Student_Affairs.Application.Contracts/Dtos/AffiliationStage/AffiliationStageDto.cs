@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.AffiliationStage
 {
 
 
-    public class AffiliationStageDto:EntityDto<int>
+    public class AffiliationStageDto : EntityDto<int>
     {
         public string? Name { get; set; }
 
@@ -19,7 +16,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.AffiliationStage
     }
 
 
-    public class CreateAffiliationStageDto 
+    public class CreateAffiliationStageDto
     {
         public string? Name { get; set; }
 

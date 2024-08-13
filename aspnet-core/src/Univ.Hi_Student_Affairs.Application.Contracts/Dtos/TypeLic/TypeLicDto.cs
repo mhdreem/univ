@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.TypeLic
@@ -29,11 +28,11 @@ namespace Univ.Hi_Student_Affairs.Dtos.TypeLic
         public virtual Collection<TypeLicBranchDto> TypeLicBranchs { get; protected set; } //Sub collection
 
 
-     
+
     }
 
 
-    public class CreateTypeLicDto 
+    public class CreateTypeLicDto
     {
         //الشهادة الثانوية
         public virtual string NameAr { get; set; }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Language
 {
@@ -21,7 +17,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Language
         public virtual int? Ord { get; set; }
     }
 
-    public class CreateLanguageDto 
+    public class CreateLanguageDto
     {
         //اللغة
         public virtual string NameAr { get; set; }
@@ -37,8 +33,9 @@ namespace Univ.Hi_Student_Affairs.Dtos.Language
         public virtual int? Ord { get; set; }
     }
 
-    public class UpdateLanguageDto :CreateLanguageDto{
-     
+    public class UpdateLanguageDto : CreateLanguageDto
+    {
+
         public int Id { get; set; }
     }
 

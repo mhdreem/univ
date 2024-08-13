@@ -17,7 +17,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.AbsenceOrder
 
     }
 
-    public class CreateAbsenceOrderDto 
+    public class CreateAbsenceOrderDto
     {
         [Required]
         [MaxLength(255)]
@@ -34,11 +34,11 @@ namespace Univ.Hi_Student_Affairs.Dtos.AbsenceOrder
     public class UpdateAbsenceOrderDto : CreateAbsenceOrderDto
     {
         public int Id { get; set; }
-        
+
     }
 
 
-    public class CheckAbsenceOrderDto:EntityDto<int?>
+    public class CheckAbsenceOrderDto : EntityDto<int?>
     {
         public string? Name { get; set; }
 

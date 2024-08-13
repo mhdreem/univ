@@ -1,5 +1,4 @@
-﻿using System;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Semester
 {
@@ -31,7 +30,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Semester
     }
 
 
-    public class CreateSemesterDto 
+    public class CreateSemesterDto
     {
 
         //الفصل الدراسي
@@ -66,7 +65,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Semester
     }
 
 
-    public class CheckSemesterDto :EntityDto<int>
+    public class CheckSemesterDto : EntityDto<int>
     {
         //الفصل الدراسي
         public virtual string? NameAr { get; set; }

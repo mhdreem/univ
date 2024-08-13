@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Univ.Hi_Student_Affairs.Dtos.UnivType
+﻿namespace Univ.Hi_Student_Affairs.Dtos.UnivType
 {
     public class UnivTypeFilter
     {

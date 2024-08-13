@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Univ.Hi_Student_Affairs.EntityFrameworkCore;
 using Volo.Abp.Domain.Entities;
@@ -10,26 +9,18 @@ using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Uow;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
-using Volo.Abp.Uow;
 
 namespace Univ.Hi_Student_Affairs.Repositories
 {
     public class AdvancedRepository<TEntity> : EfCoreRepository<Hi_Student_AffairsDbContext, TEntity>, IAdvancedRepository<TEntity>
-    where TEntity : class,IEntity
+    where TEntity : class, IEntity
     {
         public AdvancedRepository(IDbContextProvider<Hi_Student_AffairsDbContext> dbContextProvider)
             : base(dbContextProvider)
         {
         }
 
-       
+
 
         [UnitOfWork]
         public virtual async Task SaveWithTransactionAsync(Func<Task> saveAction)
@@ -51,7 +42,7 @@ namespace Univ.Hi_Student_Affairs.Repositories
             }
             */
         }
-      
+
 
         public async Task<List<TEntity>> SearchAsync(Expression<Func<TEntity, bool>> predicate)
         {
@@ -61,7 +52,7 @@ namespace Univ.Hi_Student_Affairs.Repositories
     }
 
 
-    public class AdvancedRepository1<TEntity> : IAdvancedRepository1<TEntity> where TEntity : class,IEntity<Guid>
+    public class AdvancedRepository1<TEntity> : IAdvancedRepository1<TEntity> where TEntity : class, IEntity<Guid>
     {
         private readonly IRepository<TEntity, Guid> _repository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;

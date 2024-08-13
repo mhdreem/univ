@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace Univ.Hi_Student_Affairs.EntityFrameworkCore;
 
@@ -16,7 +15,7 @@ public class Hi_Student_AffairsDbContextFactory : IDesignTimeDbContextFactory<Hi
 
         var configuration = BuildConfiguration();
 
-        var builder = (DbContextOptionsBuilder<Hi_Student_AffairsDbContext>) new DbContextOptionsBuilder<Hi_Student_AffairsDbContext>()
+        var builder = (DbContextOptionsBuilder<Hi_Student_AffairsDbContext>)new DbContextOptionsBuilder<Hi_Student_AffairsDbContext>()
             .UseOracle(configuration.GetConnectionString("Default"));
 
         return new Hi_Student_AffairsDbContext(builder.Options);

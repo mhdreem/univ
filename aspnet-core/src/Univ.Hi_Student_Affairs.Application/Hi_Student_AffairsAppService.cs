@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Univ.Hi_Student_Affairs.Localization;
+﻿using Univ.Hi_Student_Affairs.Localization;
 using Volo.Abp.Application.Services;
 
 namespace Univ.Hi_Student_Affairs;

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.RegStage
 {
@@ -23,7 +22,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.RegStage
 
     public class UpdateRegStageDto : CreateRegStageDto
     {
-        public int Id { get; set;}
+        public int Id { get; set; }
 
     }
 

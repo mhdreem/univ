@@ -1,5 +1,4 @@
-﻿using System;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.TypeLic
 {
@@ -20,12 +19,12 @@ namespace Univ.Hi_Student_Affairs.Dtos.TypeLic
 
         public virtual string? Barcode { get; set; }
 
-      
+
 
     }
 
 
-    public class CreateTypeLicBranchDto 
+    public class CreateTypeLicBranchDto
     {
 
         public int? TypeLicId { get; set; }
@@ -50,7 +49,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.TypeLic
     public class UpdateTypeLicBranchDto : CreateTypeLicBranchDto
     {
 
-      public int Id { get; set; }
+        public int Id { get; set; }
 
     }
 

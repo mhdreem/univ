@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Uow;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -38,15 +36,15 @@ public class Hi_Student_AffairsEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<Hi_Student_AffairsDbContext>(options =>
         {
-                /* Remove "includeAllEntities: true" to create
-                 * default repositories only for aggregate roots */
+            /* Remove "includeAllEntities: true" to create
+             * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
         });
 
         Configure<AbpDbContextOptions>(options =>
         {
-                /* The main point to change your DBMS.
-                 * See also Hi_Student_AffairsMigrationsDbContextFactory for EF Core tooling. */
+            /* The main point to change your DBMS.
+             * See also Hi_Student_AffairsMigrationsDbContextFactory for EF Core tooling. */
             options.UseOracle();
         });
 

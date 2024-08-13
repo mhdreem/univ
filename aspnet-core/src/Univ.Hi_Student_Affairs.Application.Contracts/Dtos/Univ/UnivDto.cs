@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Univ
 {
@@ -26,14 +25,14 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
 
         public virtual string? UnivEncode { get; set; }
 
-        public virtual Collection<UnivSectionDto>? UnivSections { get;  set; } //Sub collection
+        public virtual Collection<UnivSectionDto>? UnivSections { get; set; } //Sub collection
 
 
-       
+
     }
 
 
-    public class CreateUnivDto 
+    public class CreateUnivDto
     {
 
 
@@ -67,7 +66,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
     }
 
 
-    public class CheckUnivDto:EntityDto<int?>
+    public class CheckUnivDto : EntityDto<int?>
     {
         //اسم الجامعة        
         public string? NameAr { get; set; }
@@ -87,7 +86,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Univ
 
         public virtual string? UnivEncode { get; set; }
 
-      
+
 
     }
 

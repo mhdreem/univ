@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
 
-namespace Univ.Hi_Student_Affairs
+namespace Univ.Hi_Student_Affairs.Domain.StdAffiliation
 {
-    public class StdAffiliationStage : BasicAggregateRoot<int>
+    public class StdAffiliationStage : Entity<Guid>
     {
         [ForeignKey("StdAffiliationId")]
-        public Guid? StdAffiliationId { get; set; }
-        public StdAffiliation? StdAffiliation { get; set; }
+        public Guid? StdAffiliationId { get; private set; }
+
 
     }
 }

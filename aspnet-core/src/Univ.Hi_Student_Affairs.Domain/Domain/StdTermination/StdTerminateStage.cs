@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
 
-namespace Univ.Hi_Student_Affairs
+namespace Univ.Hi_Student_Affairs.Domain.StdTermination
 {
-    public class StdTerminateStage : BasicAggregateRoot<int>
+    public class StdTerminateStage : Entity<int>
     {
         [ForeignKey("StdTerminationId")]
-        public Guid? StdTerminationId { get; set; }
-        public StdTermination? StdTermination { get; set; }
+        public Guid? StdTerminationId { get; private set; }
+
 
     }
 }

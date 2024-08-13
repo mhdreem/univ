@@ -2,11 +2,10 @@
 using Univ.Hi_Student_Affairs.Dtos.AverageCalc;
 using Univ.Hi_Student_Affairs.Dtos.Univ;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
 
 namespace Univ.Hi_Student_Affairs.Dtos.StudyPlan
 {
-    public  class StudyPlanDto : EntityDto<int>
+    public class StudyPlanDto : EntityDto<int>
     {
         //وصف الخطة الدراسية        
         public string Name { get; set; }
@@ -17,8 +16,34 @@ namespace Univ.Hi_Student_Affairs.Dtos.StudyPlan
 
 
         //تاريخ بداية الخطة
+
+        /* Unmerged change from project 'Univ.Hi_Student_Affairs.Application.Contracts (netstandard2.0)'
+        Before:
+                public DateTime? FireDate { get; set; }
+
+
+                //الترتيب
+        After:
+                public DateTime? FireDate { get; set; }
+
+
+                //الترتيب
+        */
+
+        /* Unmerged change from project 'Univ.Hi_Student_Affairs.Application.Contracts (net8.0)'
+        Before:
+                public DateTime? FireDate { get; set; }
+
+
+                //الترتيب
+        After:
+                public DateTime? FireDate { get; set; }
+
+
+                //الترتيب
+        */
         public DateTime? FireDate { get; set; }
-        
+
 
         //الترتيب
         public int? Ord { get; set; }
@@ -32,14 +57,14 @@ namespace Univ.Hi_Student_Affairs.Dtos.StudyPlan
         public virtual AverageCalcDto AverageCalc { get; set; }
 
 
-       
+
 
 
 
     }
 
 
-    public class CreateStudyPlanDto 
+    public class CreateStudyPlanDto
     {
         //وصف الخطة الدراسية        
         public string Name { get; set; }
@@ -80,7 +105,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.StudyPlan
 
     }
 
-    public class CheckStudyPlanDto :EntityDto<int?>
+    public class CheckStudyPlanDto : EntityDto<int?>
     {
         //وصف الخطة الدراسية        
         public string Name { get; set; }

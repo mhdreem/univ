@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.Domain.Entities;
 
-namespace Univ.Hi_Student_Affairs
+namespace Univ.Hi_Student_Affairs.Domain.StdChangeCollage
 {
-    public class StdChangeCollageDet : FullAuditedAggregateRoot<Guid>
+    public class StdChangeCollageDet : Entity<Guid>
     {
         [ForeignKey("StdChangeCollageId")]
-        public Guid? StdChangeCollageId { get; set; }
-        public StdChangeCollage? StdChangeCollage { get; set; }
+        public Guid? StdChangeCollageId { get; private set; }
+
 
     }
 }

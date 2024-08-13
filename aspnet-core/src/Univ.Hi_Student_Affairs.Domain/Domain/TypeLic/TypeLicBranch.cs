@@ -1,52 +1,78 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Volo.Abp.Domain.Entities;
+using Univ.Hi_Student_Affairs.Domain.Abstruct;
 
-namespace Univ.Hi_Student_Affairs
+
+
+namespace Univ.Hi_Student_Affairs.Domain.TypeLic
 {
 
-    public class TypeLicBranch : BasicAggregateRoot<int>
+    public class TypeLicBranch : TEncodeTableEntity<int>
     {
-        public TypeLicBranch()
-        {
-            NameAr = "";
-            NameEn = "";
-        }
-
-        public TypeLicBranch(int id,string name_Ar, string name_En, int? ministry_Encode, string? barcode,int? ord)
-        {
-            Id = id;
-            NameAr = name_Ar ?? throw new ArgumentNullException(nameof(name_Ar));
-            NameEn = name_En ?? throw new ArgumentNullException(nameof(name_En));
-
-            MinistryEncode = ministry_Encode;
-            Barcode = barcode;
-          
-            Ord = ord;
-        }
-
 
         [ForeignKey("TypeLicId")]
-        public int? TypeLicId { get; set; }
-        public TypeLic? TypeLic { get; set; }
-
-
-        //فرع الشهادة
-
-        public string NameAr { get; set; }
-        public string NameEn { get; set; }
+        public int? TypeLicId { get; private set; }
 
 
 
-        //رمز الفرع بوزارة التعليم
-        public virtual int? MinistryEncode { get; set; }
+        public TypeLicBranch(int id, int? typeLicId, string nameAr, string nameEn, int? ord, string barcode)
+            : base(id, nameAr, nameEn, ord, barcode)
+        {
+            SetTypeLicId(typeLicId);
 
-        public virtual string? Barcode { get; set; }
+        }
+
+        public TypeLicBranch(int typeLicId, string nameAr, string nameEn, int? ord, string barcode)
+         : base(nameAr, nameEn, ord, barcode)
+        {
+            SetTypeLicId(typeLicId);
+
+        }
 
 
-        public virtual int? Ord { get; set; }
+        private void SetTypeLicId(int? typeLicId)
+        {
+            if (typeLicId <= 0)
+            {
+                throw new ArgumentException("Invalid TypeLic ID", nameof(typeLicId));
+            }
+            TypeLicId = typeLicId;
+        }
 
-       
+
+        public void ChangeTypeLicId(int newTypeLicId)
+        {
+            SetTypeLicId(newTypeLicId);
+
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            var other = (TypeLicBranch)obj;
+            return Id == other.Id &&
+                   TypeLicId == other.TypeLicId &&
+                   NameAr == other.NameAr &&
+                   NameEn == other.NameEn &&
+                   Ord == other.Ord &&
+                   Barcode == other.Barcode;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, TypeLicId, NameAr, NameEn, Ord, Barcode);
+        }
+
+        public override string ToString()
+        {
+            return $"[TypeLicBranch: Id={Id}, TypeLicId={TypeLicId}, NameAr={NameAr}, NameEn={NameEn}, Ord={Ord},Barcode={Barcode} ]";
+        }
+
+
     }
+
 }
+

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Degree
 {
@@ -12,7 +11,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Degree
     }
 
 
-    public class CreateDegreeDto 
+    public class CreateDegreeDto
     {
         public string? NameAr { get; set; }
         public string? NameEn { get; set; }
@@ -23,8 +22,8 @@ namespace Univ.Hi_Student_Affairs.Dtos.Degree
 
     public class UpdateDegreeDto : CreateDegreeDto
     {
-     
-        public int Id{ get; set; }
+
+        public int Id { get; set; }
 
     }
 

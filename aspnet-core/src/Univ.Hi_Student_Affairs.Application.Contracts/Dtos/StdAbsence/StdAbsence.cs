@@ -17,7 +17,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdAbsence
 
 
 
-       
+
         public Guid? StudentId { get; set; }
         public StudentDto? Student { get; set; }
 
@@ -36,12 +36,12 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdAbsence
 
         //الفصل الحالي
         public int? SemesterFromId { get; set; }
-        
+
         public virtual SemesterDto? SemesterFrom { get; set; }
 
         //الفصل الحالي
         public int? SemesterToId { get; set; }
-        
+
         public virtual SemesterDto? SemesterTo { get; set; }
 
 
@@ -61,7 +61,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdAbsence
     }
 
 
-    public class CreateStdAbsenceDto 
+    public class CreateStdAbsenceDto
     {
 
 

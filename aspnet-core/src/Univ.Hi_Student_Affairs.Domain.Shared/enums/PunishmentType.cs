@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Univ.Hi_Student_Affairs
+﻿namespace Univ.Hi_Student_Affairs
 {
-    public  enum PunishmentType
+    public enum PunishmentType : byte
     {
         Internal,
         External

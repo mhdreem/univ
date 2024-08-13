@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.AffiliationOrder
 {
@@ -13,7 +12,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.AffiliationOrder
 
     }
 
-    public class CreateAffiliationOrderDto 
+    public class CreateAffiliationOrderDto
     {
         public string Name { get; set; }
 
@@ -23,7 +22,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.AffiliationOrder
 
     }
 
-    public class UpdateAffiliationOrderDto:CreateAffiliationOrderDto
+    public class UpdateAffiliationOrderDto : CreateAffiliationOrderDto
     {
         public int Id { get; set; }
 

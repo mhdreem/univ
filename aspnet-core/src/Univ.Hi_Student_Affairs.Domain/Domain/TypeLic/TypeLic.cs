@@ -1,92 +1,91 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Univ.Hi_Student_Affairs.Domain.Abstruct;
 using Volo.Abp;
-using Volo.Abp.Domain.Entities;
 
-
-namespace Univ.Hi_Student_Affairs
-
+namespace Univ.Hi_Student_Affairs.Domain.TypeLic
 {
-
-    public class TypeLic : BasicAggregateRoot<int>
+    public class TypeLic : TEncodeTableAggregateRoot<int>
     {
 
+        public virtual ICollection<TypeLicBranch>? TypeLicBranchs { get; protected set; } //Sub collection
 
-
-        //الشهادة الثانوية
-        public virtual string NameAr { get; set; }
-
-
-        //الشهادة باللغة الاجنبية
-        public virtual string NameEn { get; set; }
-
-
-
-
-        //رمز الفرع بوزارة التعليم
-        public virtual int? MinistryEncode { get; set; }
-
-
-        public virtual string? Barcode { get; set; }
-
-
-        public virtual int? Ord { get; set; }
-
-
-
-        public virtual Collection<TypeLicBranch>? TypeLicBranchs { get; protected set; } //Sub collection
-
-
-        public TypeLic()
+        public override bool Equals(object? obj)
         {
-            NameAr = "";
-            NameEn = "";
-            TypeLicBranchs = new Collection<TypeLicBranch>();
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            var other = (TypeLic)obj;
+            return Id == other.Id &&
+                   NameAr == other.NameAr &&
+                   NameEn == other.NameEn &&
+                   Ord == other.Ord &&
+                   Barcode == other.Barcode;
         }
 
-        public TypeLic(string? nameAr, string? nameEn, int? ministryEncode, string? barcode, int? ord )
+        public override int GetHashCode()
         {
-            NameAr = nameAr;
-            NameEn = nameEn;
-            MinistryEncode = ministryEncode;
-            Barcode = barcode;
-            this.Ord = ord;
-            TypeLicBranchs = new Collection<TypeLicBranch>();
+            return HashCode.Combine(Id, NameAr, NameEn, Ord, Barcode, TypeLicBranchs);
+        }
+
+        public override string ToString()
+        {
+            return $"[TypeLic: Id={Id},  NameAr={NameAr}, NameEn={NameEn}, Ord={Ord},Barcode={Barcode} ,TypeLicBranchs={TypeLicBranchs}]";
+        }
+
+        public TypeLic(string nameAr, string? nameEn, int? ord, string? barcode)
+          : base(nameAr, nameEn, ord, barcode)
+
+        {
 
 
         }
 
+        public TypeLic(string nameAr, string? nameEn, int? ord, string? barcode, ICollection<TypeLicBranch>? typeLicBranch)
+            : base(nameAr, nameEn, ord, barcode)
 
-        ////////////////////////////////////
-        ///TypeLicBranch
-        ////////////////////////////////////
+        {
+
+            TypeLicBranchs = typeLicBranch ?? new List<TypeLicBranch>();
+        }
+
+        public TypeLic(int id, string nameAr, string nameEn, int? ord, string barcode, ICollection<TypeLicBranch>? typeLicBranch)
+           : base(id, nameAr, nameEn, ord, barcode)
+        {
+
+            TypeLicBranchs = typeLicBranch ?? new List<TypeLicBranch>();
+        }
+
+
 
         public TypeLic AddTypeLicBranch(
-            TypeLicBranch TypeLicBranch
+            string nameAr, string nameEn, int? ord, string? barcode
 
              )
         {
-            
+
 
             if (TypeLicBranchs is null ||
                 TypeLicBranchs.Count == 0)
                 TypeLicBranchs = new Collection<TypeLicBranch>();
 
 
-            if (TypeLicBranchs.Where(x => x.NameAr != null && x.NameAr.Equals(TypeLicBranch.NameAr)).Any())
+            if (TypeLicBranchs.Where(x => x.NameAr != null && x.NameAr.Equals(nameAr)).Any())
                 throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.TypeLicBranchNameArAlreadyExists);
 
 
-            if (TypeLicBranchs.Where(x => x.NameEn != null && x.NameEn.Equals(TypeLicBranch.NameEn)).Any())
+            if (TypeLicBranchs.Where(x => x.NameEn != null && x.NameEn.Equals(nameEn)).Any())
                 throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
 
 
 
 
 
-            TypeLicBranchs.Add(new TypeLicBranch(0,TypeLicBranch.NameAr, TypeLicBranch.NameEn, TypeLicBranch.MinistryEncode, TypeLicBranch.Barcode,  TypeLicBranch.Ord));
+            TypeLicBranchs.Add(new TypeLicBranch(this.Id, nameAr, nameAr, ord, barcode));
 
             return this;
         }
@@ -95,7 +94,7 @@ namespace Univ.Hi_Student_Affairs
 
         public TypeLic UpdateTypeLicBranch(
              int TypeLicBranchId,
-             TypeLicBranch input
+           string nameAr, string nameEn, int? ord, string? barcode
             )
         {
             if (TypeLicBranchs is null ||
@@ -109,21 +108,13 @@ namespace Univ.Hi_Student_Affairs
 
 
 
-            if (TypeLicBranchs.Where(x => x.NameAr != null && x.Id != TypeLicBranchId && x.NameAr.Equals(input.NameAr)).Any())
+            if (TypeLicBranchs.Where(x => x.NameAr != null && x.Id != TypeLicBranchId && x.NameAr.Equals(nameAr)).Any())
                 throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameArAlreadyExists);
 
 
-            if (TypeLicBranchs.Where(x => x.NameEn != null && x.Id != TypeLicBranchId && x.NameEn.Equals(input.NameEn)).Any())
+            if (TypeLicBranchs.Where(x => x.NameEn != null && x.Id != TypeLicBranchId && x.NameEn.Equals(nameEn)).Any())
                 throw new BusinessException(Hi_Student_AffairsDomainErrorCodes.CityNameEnAlreadyExists);
 
-
-
-
-
-            TypeLicBranch.NameAr = input.NameAr;
-            TypeLicBranch.NameEn = input.NameEn;
-            TypeLicBranch.Ord = input.Ord;
-            TypeLicBranch.MinistryEncode = input.MinistryEncode;
 
 
 
@@ -165,8 +156,7 @@ namespace Univ.Hi_Student_Affairs
             }
             return TypeLicBranch;
         }
-
-
-
     }
 }
+
+

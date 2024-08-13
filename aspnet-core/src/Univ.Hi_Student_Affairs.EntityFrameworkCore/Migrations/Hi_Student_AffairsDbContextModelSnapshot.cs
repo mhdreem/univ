@@ -24,216 +24,7 @@ namespace Univ.Hi_Student_Affairs.Migrations
 
             OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.AbsenceOrder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AbsenceType")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppAbsenceOrder", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.AbsenceStage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("StageState")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppAbsenceStage", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Admission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AdmissionKindId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("FeeCalcTypeId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdmissionKindId");
-
-                    b.HasIndex("FeeCalcTypeId");
-
-                    b.ToTable("AppAdmission", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.AdmissionKind", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppAdmissionKind", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.AffiliationOrder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AffiliationType")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppAffiliationOrder", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.AffiliationStage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("StageState")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppAffiliationStage", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.AverageCalc", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Desc")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AverageCalc");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Branch", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.ToTable("AppBranch", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.City", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Country.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -245,9 +36,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<int>("CountryId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("MinistryEncode")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("NameAr")
@@ -273,60 +61,7 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppCity", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.CivilReg", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CityId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("CountryId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.HasIndex("CountryId");
-
-                    b.ToTable("AppCivilReg", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Class", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppClass", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.CollType", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Country.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -337,96 +72,8 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<string>("Barcode")
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppCollType", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Collage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("CollTypeId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("DeanAr")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("DeanEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("DegreeId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("DegreeNameAr")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("DegreeNameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
-
-                    b.Property<int?>("NumYear")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int>("UnivSectionId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CollTypeId");
-
-                    b.HasIndex("DegreeId");
-
-                    b.HasIndex("UnivSectionId");
-
-                    b.ToTable("AppCollage", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Continent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<byte>("Continent")
+                        .HasColumnType("NUMBER(3)");
 
                     b.Property<string>("NameAr")
                         .IsRequired()
@@ -442,48 +89,11 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
-
-                    b.ToTable("AppContinent", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int>("ContinentId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContinentId");
 
                     b.ToTable("AppCountry", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Degree", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAbsence.AbsenceOrder", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -491,143 +101,22 @@ namespace Univ.Hi_Student_Affairs.Migrations
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("NameAr")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppDegree", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Department", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int>("CollageId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("DegreeNameAr")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("DegreeNameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CollageId");
-
-                    b.ToTable("AppDepartment", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Deprivation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("DeprivationType")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<byte>("AbsenceType")
+                        .HasColumnType("NUMBER(3)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.Property<int?>("Number")
+                    b.Property<int?>("Ord")
                         .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppDeprivation", (string)null);
+                    b.ToTable("AppAbsenceOrder", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdNonSyrianUnivDet", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("RAW(16)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("NVARCHAR2(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(1)")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<Guid?>("StdNonSyrianUnivId")
-                        .HasColumnType("RAW(16)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StdNonSyrianUnivId");
-
-                    b.ToTable("AppStdNonSyrianUnivDet", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.FeeCalcType", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAbsence.AbsenceStage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -642,461 +131,15 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<int?>("Ord")
                         .HasColumnType("NUMBER(10)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("AppFeeCalcType", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.IdentifierType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<byte>("StageState")
+                        .HasColumnType("NUMBER(3)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppIdentifierType", (string)null);
+                    b.ToTable("AppAbsenceStage", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Jender", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Jender");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Language", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppLanguage", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Military", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CityId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("AppMilitary", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Ministry", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NameAr")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppMinistry", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Nationality", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppNationality", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Operation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppOperation", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Punishment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("DeprivationId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("PunishEffect")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("PunishmentType")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<bool?>("UnivDismissal")
-                        .HasColumnType("NUMBER(1)");
-
-                    b.Property<bool?>("ZeroMark")
-                        .HasColumnType("NUMBER(1)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DeprivationId");
-
-                    b.ToTable("AppPunishment", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.PunishmentReason", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppPunishmentReason", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.PunishmentStage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("StageState")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppPunishmentStage", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.RegOrder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("RegType")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppRegOrder", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.RegStage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("StageState")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppRegStage", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Semester", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("GradeNameAr")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("GradeNameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppSemester", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.SeqResult", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NameAr")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<string>("NameEn")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppSeqResult", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.SeqStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NameAr")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<string>("NameEn")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppSeqStatus", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Status", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NameAr")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppStatus", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAbolition", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("RAW(16)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("NVARCHAR2(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("DATE");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(1)")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<int?>("No")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("PunishmentId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("Result")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PunishmentId");
-
-                    b.ToTable("AppStdAbolition", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAbsence", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAbsence.StdAbsence", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
@@ -1107,8 +150,8 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<int?>("AbsenceOrderId1")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("AbsenceState")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<byte?>("AbsenceState")
+                        .HasColumnType("NUMBER(3)");
 
                     b.Property<string>("Agent")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -1177,7 +220,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<Guid?>("StudentId")
-                        .IsRequired()
                         .HasColumnType("RAW(16)");
 
                     b.Property<int?>("YearFrom")
@@ -1199,52 +241,10 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdAbsence", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAbsenceStage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAbsence.StdAbsenceStage", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("NVARCHAR2(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(1)")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("LastModifierId");
 
                     b.Property<Guid?>("StdAbsenceId")
                         .HasColumnType("RAW(16)");
@@ -1256,19 +256,19 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdAbsenceStage", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAdmission", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAdmission.StdAdmission", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
 
+                    b.Property<int>("Acceptance")
+                        .HasColumnType("NUMBER(10)");
+
                     b.Property<int?>("AdmissionID")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("AdmissionLanguageId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<bool?>("AdmissionType")
-                        .HasColumnType("NUMBER(1)");
+                    b.Property<byte?>("AdmissionLanguage")
+                        .HasColumnType("NUMBER(3)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -1307,8 +307,8 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted");
 
-                    b.Property<int?>("LanguageId")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<byte?>("Language")
+                        .HasColumnType("NUMBER(3)");
 
                     b.Property<int?>("LanguageMark")
                         .HasColumnType("NUMBER(10)");
@@ -1331,7 +331,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<Guid?>("StudentId")
-                        .IsRequired()
                         .HasColumnType("RAW(16)");
 
                     b.Property<long?>("SubectMark")
@@ -1347,16 +346,58 @@ namespace Univ.Hi_Student_Affairs.Migrations
 
                     b.HasIndex("AdmissionID");
 
-                    b.HasIndex("AdmissionLanguageId");
-
-                    b.HasIndex("LanguageId");
-
                     b.HasIndex("StudentId");
 
                     b.ToTable("AppStdAdmission", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAffiliation", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAffiliation.AffiliationOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte>("AffiliationType")
+                        .HasColumnType("NUMBER(3)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppAffiliationOrder", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAffiliation.AffiliationStage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<byte>("StageState")
+                        .HasColumnType("NUMBER(3)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppAffiliationStage", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAffiliation.StdAffiliation", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
@@ -1367,8 +408,8 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<int?>("AffiliationOrderId1")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("AffiliationState")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<byte?>("AffiliationState")
+                        .HasColumnType("NUMBER(3)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -1419,7 +460,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<Guid?>("StudentId")
-                        .IsRequired()
                         .HasColumnType("RAW(16)");
 
                     b.Property<int?>("Year")
@@ -1436,13 +476,10 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdAffiliation", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAffiliationStage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAffiliation.StdAffiliationStage", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("RAW(16)");
 
                     b.Property<Guid?>("StdAffiliationId")
                         .HasColumnType("RAW(16)");
@@ -1454,7 +491,7 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdAffiliationStage", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdCertificate", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdCertificate.StdCertificate", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
@@ -1526,7 +563,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<Guid?>("StudentId")
-                        .IsRequired()
                         .HasColumnType("RAW(16)");
 
                     b.Property<long?>("TotalMark")
@@ -1552,14 +588,10 @@ namespace Univ.Hi_Student_Affairs.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("TypeLicBranchId");
-
-                    b.HasIndex("TypeLicId");
-
                     b.ToTable("AppStdCertificate", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdChangeCollage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdChangeCollage.StdChangeCollage", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
@@ -1607,7 +639,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnName("LastModifierId");
 
                     b.Property<Guid?>("StudentId")
-                        .IsRequired()
                         .HasColumnType("RAW(16)");
 
                     b.HasKey("Id");
@@ -1617,64 +648,20 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdChangeCollage", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdChangeCollageDet", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdChangeCollage.StdChangeCollageDet", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("NVARCHAR2(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(1)")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("LastModifierId");
 
                     b.Property<Guid?>("StdChangeCollageId")
                         .HasColumnType("RAW(16)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StdChangeCollageId");
-
                     b.ToTable("AppStdChangeCollageDet", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdInstitute", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdInstitute.StdInstitute", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
@@ -1731,7 +718,7 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdInstitute", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdLife", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdLife.StdLife", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
@@ -1781,7 +768,7 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("RAW(16)")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<int?>("OperationId")
+                    b.Property<int?>("Operation")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("Ord")
@@ -1791,7 +778,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("RAW(16)");
 
                     b.Property<Guid?>("StudentId")
-                        .IsRequired()
                         .HasColumnType("RAW(16)");
 
                     b.Property<string>("Time")
@@ -1799,88 +785,146 @@ namespace Univ.Hi_Student_Affairs.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OperationId");
-
                     b.HasIndex("StudentId");
 
                     b.ToTable("AppStdLife", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdNonSyrianUniv", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdNonSyrianUnivDet", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("NVARCHAR2(40)")
-                        .HasColumnName("ConcurrencyStamp");
+                    b.Property<Guid?>("StdNonSyrianUnivId")
+                        .HasColumnType("RAW(16)");
 
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("CreationTime");
+                    b.HasKey("Id");
 
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("CreatorId");
+                    b.ToTable("AppStdNonSyrianUnivDet", (string)null);
+                });
 
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<bool>("IsDeleted")
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.Deprivation", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(1)")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
+                        .HasColumnType("NUMBER(10)");
 
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("LastModificationTime");
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("LastModifierId");
+                    b.Property<byte>("DeprivationType")
+                        .HasColumnType("NUMBER(3)");
 
-                    b.Property<Guid?>("StudentId")
-                        .IsRequired()
-                        .HasColumnType("RAW(16)");
+                    b.Property<string>("Name")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Number")
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("AppStdNonSyrianUniv", (string)null);
+                    b.ToTable("AppDeprivation", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdPhoto", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.Punishment", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("RAW(16)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
 
-                    b.Property<byte[]>("Data")
-                        .HasColumnType("RAW(2000)");
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid?>("StudentId")
-                        .HasColumnType("RAW(16)");
+                    b.Property<int?>("DeprivationId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("PunishEffect")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<byte>("PunishmentType")
+                        .HasColumnType("NUMBER(3)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppStdPhoto", (string)null);
+                    b.HasIndex("DeprivationId");
+
+                    b.ToTable("AppPunishment", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdPunishment", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.PunishmentReason", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppPunishmentReason", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.PunishmentStage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<byte>("StageState")
+                        .HasColumnType("NUMBER(3)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppPunishmentStage", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.StdAbolition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<int>("No")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int?>("PunishmentId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("Result")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppStdAbolition", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.StdPunishment", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
@@ -1911,13 +955,16 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("TIMESTAMP(7)")
                         .HasColumnName("DeletionTime");
 
+                    b.Property<bool?>("DoublePunishment")
+                        .HasColumnType("NUMBER(1)");
+
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<int?>("Fixed")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<bool?>("Fixed")
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -1945,8 +992,8 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<int?>("PunishmentReasonId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("PunishmentState")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<byte?>("PunishmentState")
+                        .HasColumnType("NUMBER(3)");
 
                     b.Property<int?>("SemesterEndId")
                         .HasColumnType("NUMBER(10)");
@@ -1957,11 +1004,7 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<int?>("StdAbolitionId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<Guid?>("StdAbolitionId1")
-                        .HasColumnType("RAW(16)");
-
                     b.Property<Guid?>("StudentId")
-                        .IsRequired()
                         .HasColumnType("RAW(16)");
 
                     b.Property<int?>("Year")
@@ -1970,77 +1013,20 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<int?>("YearEnd")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<bool?>("doublePunishment")
-                        .HasColumnType("NUMBER(1)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("PunishmentId");
-
-                    b.HasIndex("PunishmentReasonId");
-
-                    b.HasIndex("SemesterEndId");
-
-                    b.HasIndex("SemesterId");
-
-                    b.HasIndex("StdAbolitionId1");
 
                     b.HasIndex("StudentId");
 
                     b.ToTable("AppStdPunishment", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdPunishmentStage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.StdPunishmentStage", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("NVARCHAR2(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("CreatorId");
-
                     b.Property<DateTime?>("Date")
                         .HasColumnType("DATE");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(1)")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("LastModifierId");
 
                     b.Property<string>("No")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -2048,78 +1034,73 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.Property<int?>("PunishmentId")
+                    b.Property<int>("PunishmentId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("PunishmentStageId")
+                    b.Property<int>("PunishmentStageId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("StdPunishmentId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<Guid?>("StdPunishmentId1")
+                    b.Property<Guid?>("StdPunishmentId")
                         .HasColumnType("RAW(16)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PunishmentId");
-
-                    b.HasIndex("PunishmentStageId");
-
-                    b.HasIndex("StdPunishmentId1");
+                    b.HasIndex("StdPunishmentId");
 
                     b.ToTable("StdPunishmentStages");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdRegStage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdRegistration.RegOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<byte?>("RegType")
+                        .HasColumnType("NUMBER(3)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRegOrder", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdRegistration.RegStage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<byte?>("StageState")
+                        .HasColumnType("NUMBER(3)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRegStage", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdRegistration.StdRegStage", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("NVARCHAR2(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("CreatorId");
-
                     b.Property<DateTime?>("Date")
                         .HasColumnType("TIMESTAMP(7)");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(1)")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("LastModifierId");
 
                     b.Property<string>("No")
                         .HasColumnType("NVARCHAR2(2000)");
@@ -2142,7 +1123,7 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdRegStage", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdRegistration", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdRegistration.StdRegistration", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
@@ -2213,14 +1194,13 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<int?>("RegOrderId1")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("RegistrationState")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<byte?>("RegistrationState")
+                        .HasColumnType("NUMBER(3)");
 
                     b.Property<int?>("SemesterId")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<Guid?>("StudentId")
-                        .IsRequired()
                         .HasColumnType("RAW(16)");
 
                     b.Property<int>("Year")
@@ -2237,19 +1217,10 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdRegistration", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdSeqStudy", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdSeqStudy.StdSeqStudy", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
-
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("ClassId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("CollageId")
-                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -2273,9 +1244,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("TIMESTAMP(7)")
                         .HasColumnName("DeletionTime");
-
-                    b.Property<int?>("DepartmentId")
-                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
@@ -2306,74 +1274,37 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<bool?>("SEQ_CANCEL_CHEK")
                         .HasColumnType("NUMBER(1)");
 
-                    b.Property<int?>("SemesterId")
+                    b.Property<int?>("SeqResult")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<int?>("SeqResultId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("StatusId")
+                    b.Property<int?>("Status")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<Guid?>("StdSeqSumId")
                         .HasColumnType("RAW(16)");
 
                     b.Property<Guid?>("StudentId")
-                        .IsRequired()
                         .HasColumnType("RAW(16)");
 
                     b.Property<bool?>("TakeSemesterExam")
                         .HasColumnType("NUMBER(1)");
 
-                    b.Property<int?>("UnivId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("UnivSectionId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<long?>("Year")
-                        .HasColumnType("NUMBER(10)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("CollageId");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("SemesterId");
-
-                    b.HasIndex("SeqResultId");
-
-                    b.HasIndex("StatusId");
 
                     b.HasIndex("StdSeqSumId");
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("UnivId");
-
-                    b.HasIndex("UnivSectionId");
-
                     b.ToTable("AppStdSeqStudy", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdSeqSum", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdSeqStudy.StdSeqSum", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
-
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("ClassId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("CollageId")
-                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -2398,9 +1329,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("TIMESTAMP(7)")
                         .HasColumnName("DeletionTime");
 
-                    b.Property<int?>("DepartmentId")
-                        .HasColumnType("NUMBER(10)");
-
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)")
@@ -2423,58 +1351,32 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("RAW(16)")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<int?>("SemesterId")
+                    b.Property<int?>("SeqResult")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<int?>("SeqResultId")
                         .HasColumnType("NUMBER(10)");
 
+                    b.Property<int?>("SeqStatus")
+                        .HasColumnType("NUMBER(10)");
+
                     b.Property<int?>("SeqStatusId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("StatusId")
+                    b.Property<int?>("Status")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<Guid?>("StudentId")
                         .HasColumnType("RAW(16)");
 
-                    b.Property<int?>("UnivId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("UnivSectionId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<long?>("Year")
-                        .HasColumnType("NUMBER(10)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("CollageId");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("SemesterId");
-
-                    b.HasIndex("SeqResultId");
-
-                    b.HasIndex("SeqStatusId");
-
-                    b.HasIndex("StatusId");
-
                     b.HasIndex("StudentId");
-
-                    b.HasIndex("UnivId");
-
-                    b.HasIndex("UnivSectionId");
 
                     b.ToTable("AppStdSeqSum", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdSymTransform", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdSymTransform.StdSymTransform", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
@@ -2531,64 +1433,20 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdSymTransform", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdSymTransformDet", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdSymTransform.StdSymTransformDet", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("NVARCHAR2(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(1)")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("RAW(16)")
-                        .HasColumnName("LastModifierId");
 
                     b.Property<Guid?>("StdSymTransformId")
                         .HasColumnType("RAW(16)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StdSymTransformId");
-
                     b.ToTable("AppStdSymTransformDet", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdTerminateStage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdTermination.StdTerminateStage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2606,7 +1464,7 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdTerminateStage", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdTermination", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdTermination.StdTermination", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
@@ -2678,7 +1536,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<Guid?>("StudentId")
-                        .IsRequired()
                         .HasColumnType("RAW(16)");
 
                     b.Property<Guid?>("TerminationOrderId")
@@ -2687,8 +1544,8 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<int?>("TerminationOrderId1")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("TerminationState")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<byte?>("TerminationState")
+                        .HasColumnType("NUMBER(3)");
 
                     b.Property<int>("Year")
                         .HasColumnType("NUMBER(10)");
@@ -2706,41 +1563,234 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppStdTermination", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Student", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdTermination.TerminationOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<byte?>("TerminationType")
+                        .HasColumnType("NUMBER(3)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppTerminationOrder", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdTermination.TerminationStage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<byte?>("StageState")
+                        .HasColumnType("NUMBER(3)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppTerminationStage", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Student.Admission.Admission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AdmissionKind")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("FeeCalcType")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<byte?>("Ministry")
+                        .HasColumnType("NUMBER(3)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppAdmission", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Student.CivilReg", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppCivilReg", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Student.Class", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppClass", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Student.IdentifierType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppIdentifierType", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Student.Military", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppMilitary", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Student.Semester", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("GradeNameAr")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("GradeNameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppSemester", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Student.Student", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("RAW(16)");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<int?>("AdmissionId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("BirthPlaceAr")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("BirthPlaceEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("CityBirthId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("CivilRegId")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("CivilRegId1")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("ClassId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("CollageId")
-                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -2748,9 +1798,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("NVARCHAR2(40)")
                         .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<int?>("CountryId")
-                        .HasColumnType("NUMBER(10)");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("TIMESTAMP(7)")
@@ -2760,9 +1807,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("RAW(16)")
                         .HasColumnName("CreatorId");
 
-                    b.Property<int?>("DayBirth")
-                        .HasColumnType("NUMBER(10)");
-
                     b.Property<Guid?>("DeleterId")
                         .HasColumnType("RAW(16)")
                         .HasColumnName("DeleterId");
@@ -2771,46 +1815,13 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("TIMESTAMP(7)")
                         .HasColumnName("DeletionTime");
 
-                    b.Property<int?>("DepartmentId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<string>("ExamCollageId")
-                        .HasColumnType("NVARCHAR2(2000)");
-
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<string>("FatherNameAr")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<string>("FatherNameEn")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<string>("FirstNameAR")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<string>("FirstNameEn")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
                     b.Property<bool?>("Fixed")
                         .HasColumnType("NUMBER(1)");
-
-                    b.Property<string>("Identifier")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<int?>("IdentifierTypeId")
-                        .HasColumnType("NUMBER(10)");
 
                     b.Property<bool?>("IsArab")
                         .HasColumnType("NUMBER(1)");
@@ -2824,9 +1835,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<bool?>("IsForeign")
                         .HasColumnType("NUMBER(1)");
 
-                    b.Property<int?>("JenderId")
-                        .HasColumnType("NUMBER(10)");
-
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("TIMESTAMP(7)")
                         .HasColumnName("LastModificationTime");
@@ -2835,118 +1843,22 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .HasColumnType("RAW(16)")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<string>("LastNameAr")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<string>("LastNameEn")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<int?>("MilitaryId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("Mobile")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<int?>("MonthBirth")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("MotherNameAr")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<string>("MotherNameEn")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<int?>("NationalityId")
-                        .HasColumnType("NUMBER(10)");
-
                     b.Property<string>("Note")
                         .HasMaxLength(250)
                         .HasColumnType("NVARCHAR2(250)");
 
-                    b.Property<string>("Phone")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR2(250)");
-
-                    b.Property<int?>("SemesterId")
+                    b.Property<int?>("Status")
                         .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("StatusId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<decimal?>("StdCollageId")
-                        .HasColumnType("NUMBER(20)");
-
-                    b.Property<decimal?>("StdMinistryId")
-                        .HasColumnType("NUMBER(20)");
-
-                    b.Property<Guid?>("StdPhotoId")
-                        .HasColumnType("RAW(16)");
-
-                    b.Property<Guid?>("StdPhotoId1")
-                        .HasColumnType("RAW(16)");
 
                     b.Property<int?>("StudyPlanId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("UnivId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("UnivSectionId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("YEAR")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("YearBirth")
-                        .HasColumnType("NUMBER(10)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("AdmissionId");
-
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("CityBirthId");
-
-                    b.HasIndex("CivilRegId1");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("CollageId");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("IdentifierTypeId");
-
-                    b.HasIndex("JenderId");
-
-                    b.HasIndex("MilitaryId");
-
-                    b.HasIndex("NationalityId");
-
-                    b.HasIndex("SemesterId");
-
-                    b.HasIndex("StatusId");
-
-                    b.HasIndex("StdPhotoId1");
-
-                    b.HasIndex("StudyPlanId");
-
-                    b.HasIndex("UnivId");
-
-                    b.HasIndex("UnivSectionId");
 
                     b.ToTable("AppStudent", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StudyPlan", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.TypeLic.TypeLic", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2954,10 +1866,193 @@ namespace Univ.Hi_Student_Affairs.Migrations
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AverageCalcId")
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("CollageId")
+                    b.HasKey("Id");
+
+                    b.ToTable("AppTypeLic", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.TypeLic.TypeLicBranch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int?>("TypeLicId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TypeLicId");
+
+                    b.ToTable("AppTypeLicBranch", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.Branch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("AppBranch", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.Collage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("ColClassification")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<byte>("ColType")
+                        .HasColumnType("NUMBER(3)");
+
+                    b.Property<string>("DeanAr")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("DeanEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<byte>("Degree")
+                        .HasColumnType("NUMBER(3)");
+
+                    b.Property<string>("DegreeNameAr")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("DegreeNameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("NVARCHAR2(256)");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("NVARCHAR2(256)");
+
+                    b.Property<int?>("NumYear")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("UnivSectionId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnivSectionId");
+
+                    b.ToTable("AppCollage", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("CollageId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("DegreeNameAr")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("DegreeNameEn")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("NVARCHAR2(256)");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("NVARCHAR2(256)");
+
+                    b.Property<int?>("Ord")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CollageId");
+
+                    b.ToTable("AppDepartment", (string)null);
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.StudyPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CollageId")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Description")
@@ -2975,80 +2070,12 @@ namespace Univ.Hi_Student_Affairs.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AverageCalcId");
-
                     b.HasIndex("CollageId");
 
                     b.ToTable("StudyPlan");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.SubExamStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NameAr")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppSubExamStatus", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.TerminationOrder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("TerminationType")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppTerminationOrder", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.TerminationStage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("StageState")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppTerminationStage", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.TypeLic", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.Univ", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -3058,74 +2085,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
 
                     b.Property<string>("Barcode")
                         .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppTypeLic", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.TypeLicBranch", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("TypeLicId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TypeLicId");
-
-                    b.ToTable("AppTypeLicBranch", (string)null);
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Univ", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("NameAr")
                         .IsRequired()
@@ -3140,17 +2099,15 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Property<int?>("Ord")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("UnivTypeId")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<byte>("UnivType")
+                        .HasColumnType("NUMBER(3)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UnivTypeId");
 
                     b.ToTable("AppUniv", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.UnivSection", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.UnivSection", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -3160,9 +2117,6 @@ namespace Univ.Hi_Student_Affairs.Migrations
 
                     b.Property<string>("Barcode")
                         .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<int?>("MinistryEncode")
-                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("NameAr")
                         .IsRequired()
@@ -3187,30 +2141,61 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AppUnivSection", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.UnivType", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdNonSyrianUniv", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
+                        .HasColumnType("RAW(16)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("NVARCHAR2(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("RAW(16)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("RAW(16)")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("NUMBER(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnName("LastModificationTime");
 
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("RAW(16)")
+                        .HasColumnName("LastModifierId");
 
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
-
-                    b.Property<int?>("Ord")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<Guid?>("StudentId")
+                        .HasColumnType("RAW(16)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUnivType", (string)null);
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("AppStdNonSyrianUniv", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
@@ -4956,618 +3941,475 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Admission", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Country.City", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.AdmissionKind", "AdmissionKind")
-                        .WithMany("Admissions")
-                        .HasForeignKey("AdmissionKindId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.FeeCalcType", "FeeCalcType")
-                        .WithMany("Admissions")
-                        .HasForeignKey("FeeCalcTypeId");
-
-                    b.Navigation("AdmissionKind");
-
-                    b.Navigation("FeeCalcType");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Branch", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.Department", "Department")
-                        .WithMany("Branchs")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.City", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.Country", "Country")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Country.Country", null)
                         .WithMany("Cities")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.CivilReg", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAbsence.StdAbsence", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId");
-
-                    b.Navigation("City");
-
-                    b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Collage", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.CollType", "CollType")
-                        .WithMany("Collages")
-                        .HasForeignKey("CollTypeId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Degree", "Degree")
-                        .WithMany()
-                        .HasForeignKey("DegreeId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.UnivSection", "UnivSection")
-                        .WithMany("Collages")
-                        .HasForeignKey("UnivSectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CollType");
-
-                    b.Navigation("Degree");
-
-                    b.Navigation("UnivSection");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Country", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.Continent", "Continent")
-                        .WithMany("Countries")
-                        .HasForeignKey("ContinentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Continent");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Department", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.Collage", "Collage")
-                        .WithMany("Departments")
-                        .HasForeignKey("CollageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Collage");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdNonSyrianUnivDet", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.StdNonSyrianUniv", "StdNonSyrianUniv")
-                        .WithMany()
-                        .HasForeignKey("StdNonSyrianUnivId");
-
-                    b.Navigation("StdNonSyrianUniv");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Military", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId");
-
-                    b.Navigation("City");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Punishment", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.Deprivation", "Deprivation")
-                        .WithMany()
-                        .HasForeignKey("DeprivationId");
-
-                    b.Navigation("Deprivation");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAbolition", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.Punishment", "Punishment")
-                        .WithMany()
-                        .HasForeignKey("PunishmentId");
-
-                    b.Navigation("Punishment");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAbsence", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.AbsenceOrder", "AbsenceOrder")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdAbsence.AbsenceOrder", "AbsenceOrder")
                         .WithMany()
                         .HasForeignKey("AbsenceOrderId1");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Semester", "SemesterFrom")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Semester", "SemesterFrom")
                         .WithMany()
                         .HasForeignKey("SemesterFromId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Semester", "SemesterTo")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Semester", "SemesterTo")
                         .WithMany()
                         .HasForeignKey("SemesterToId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdAbsences")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("AbsenceOrder");
 
                     b.Navigation("SemesterFrom");
 
                     b.Navigation("SemesterTo");
-
-                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAbsenceStage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAbsence.StdAbsenceStage", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.StdAbsence", "StdAbsence")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdAbsence.StdAbsence", null)
                         .WithMany("StdAbsenceStages")
                         .HasForeignKey("StdAbsenceId");
-
-                    b.Navigation("StdAbsence");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAdmission", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAdmission.StdAdmission", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Admission", "Admission")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Admission.Admission", "Admission")
                         .WithMany()
                         .HasForeignKey("AdmissionID");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Language", "AdmissionLanguage")
-                        .WithMany()
-                        .HasForeignKey("AdmissionLanguageId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Language", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdAdmissions")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("Admission");
-
-                    b.Navigation("AdmissionLanguage");
-
-                    b.Navigation("Language");
-
-                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAffiliation", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAffiliation.StdAffiliation", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.AffiliationOrder", "AffiliationOrder")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdAffiliation.AffiliationOrder", "AffiliationOrder")
                         .WithMany()
                         .HasForeignKey("AffiliationOrderId1");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Semester", "Semester")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Semester", "Semester")
                         .WithMany()
                         .HasForeignKey("SemesterId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdAffiliations")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("AffiliationOrder");
 
                     b.Navigation("Semester");
-
-                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAffiliationStage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAffiliation.StdAffiliationStage", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.StdAffiliation", "StdAffiliation")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdAffiliation.StdAffiliation", null)
                         .WithMany("StdAffiliationStages")
                         .HasForeignKey("StdAffiliationId");
-
-                    b.Navigation("StdAffiliation");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdCertificate", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdCertificate.StdCertificate", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.City", "City")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Country.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Country", "Country")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Country.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdCertificates")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Univ.Hi_Student_Affairs.TypeLicBranch", "TypeLicBranch")
-                        .WithMany()
-                        .HasForeignKey("TypeLicBranchId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.TypeLic", "TypeLic")
-                        .WithMany()
-                        .HasForeignKey("TypeLicId");
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("City");
 
                     b.Navigation("Country");
-
-                    b.Navigation("Student");
-
-                    b.Navigation("TypeLic");
-
-                    b.Navigation("TypeLicBranch");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdChangeCollage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdChangeCollage.StdChangeCollage", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdChangeCollages")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
+                        .HasForeignKey("StudentId");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdChangeCollageDet", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdInstitute.StdInstitute", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.StdChangeCollage", "StdChangeCollage")
-                        .WithMany()
-                        .HasForeignKey("StdChangeCollageId");
-
-                    b.Navigation("StdChangeCollage");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdInstitute", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdInstitutes")
+                        .HasForeignKey("StudentId");
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdLife.StdLife", b =>
+                {
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", "Student")
+                        .WithMany("StdLife")
                         .HasForeignKey("StudentId");
 
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdLife", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.Punishment", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Operation", "Operation")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdPunishment.Deprivation", "Deprivation")
                         .WithMany()
-                        .HasForeignKey("OperationId");
+                        .HasForeignKey("DeprivationId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
-                        .WithMany("StdLife")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Operation");
-
-                    b.Navigation("Student");
+                    b.Navigation("Deprivation");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdNonSyrianUniv", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.StdPunishment", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
-                        .WithMany("StdNonSyrianUnives")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdPunishment", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Punishment", "Punishment")
-                        .WithMany()
-                        .HasForeignKey("PunishmentId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.PunishmentReason", "PunishmentReason")
-                        .WithMany()
-                        .HasForeignKey("PunishmentReasonId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Semester", "SemesterEnd")
-                        .WithMany()
-                        .HasForeignKey("SemesterEndId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Semester", "Semester")
-                        .WithMany()
-                        .HasForeignKey("SemesterId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.StdAbolition", "StdAbolition")
-                        .WithMany()
-                        .HasForeignKey("StdAbolitionId1");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdPunishments")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Class");
-
-                    b.Navigation("Punishment");
-
-                    b.Navigation("PunishmentReason");
-
-                    b.Navigation("Semester");
-
-                    b.Navigation("SemesterEnd");
-
-                    b.Navigation("StdAbolition");
-
-                    b.Navigation("Student");
+                        .HasForeignKey("StudentId");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdPunishmentStage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.StdPunishmentStage", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Punishment", "Punishment")
-                        .WithMany()
-                        .HasForeignKey("PunishmentId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.PunishmentStage", "PunishmentStage")
-                        .WithMany()
-                        .HasForeignKey("PunishmentStageId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.StdPunishment", "StdPunishment")
-                        .WithMany("StdPunishmentStage")
-                        .HasForeignKey("StdPunishmentId1");
-
-                    b.Navigation("Punishment");
-
-                    b.Navigation("PunishmentStage");
-
-                    b.Navigation("StdPunishment");
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdPunishment.StdPunishment", null)
+                        .WithMany("StdPunishmentStages")
+                        .HasForeignKey("StdPunishmentId");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdRegStage", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdRegistration.StdRegStage", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.RegStage", "RegStage")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdRegistration.RegStage", "RegStage")
                         .WithMany()
                         .HasForeignKey("RegStageId1");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.StdRegistration", "StdRegistration")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdRegistration.StdRegistration", null)
                         .WithMany("StdRegStages")
                         .HasForeignKey("StdRegistrationId");
 
                     b.Navigation("RegStage");
-
-                    b.Navigation("StdRegistration");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdRegistration", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdRegistration.StdRegistration", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.RegOrder", "RegOrder")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdRegistration.RegOrder", "RegOrder")
                         .WithMany()
                         .HasForeignKey("RegOrderId1");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Semester", "Semester")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Semester", "Semester")
                         .WithMany()
                         .HasForeignKey("SemesterId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdRegistrations")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("RegOrder");
 
                     b.Navigation("Semester");
-
-                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdSeqStudy", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdSeqStudy.StdSeqStudy", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Branch", "Branch")
-                        .WithMany()
-                        .HasForeignKey("BranchId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Collage", "Collage")
-                        .WithMany()
-                        .HasForeignKey("CollageId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Semester", "Semester")
-                        .WithMany()
-                        .HasForeignKey("SemesterId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.SeqResult", "SeqResult")
-                        .WithMany()
-                        .HasForeignKey("SeqResultId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.StdSeqSum", null)
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdSeqStudy.StdSeqSum", null)
                         .WithMany("StdSeqStudies")
                         .HasForeignKey("StdSeqSumId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdSeqStudies")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Univ", "Univ")
-                        .WithMany()
-                        .HasForeignKey("UnivId");
+                    b.OwnsOne("Univ.Hi_Student_Affairs.Domain.ValueObj.UniveInfo", "UniveInfo", b1 =>
+                        {
+                            b1.Property<Guid>("StdSeqStudyId")
+                                .HasColumnType("RAW(16)");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.UnivSection", "UnivSection")
-                        .WithMany()
-                        .HasForeignKey("UnivSectionId");
+                            b1.Property<int>("AdmissionId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("AdmissionId");
 
-                    b.Navigation("Branch");
+                            b1.Property<int?>("BranchId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("BranchId");
 
-                    b.Navigation("Class");
+                            b1.Property<int?>("ClassId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("ClassId");
 
-                    b.Navigation("Collage");
+                            b1.Property<int>("CollageId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("CollageId");
 
-                    b.Navigation("Department");
+                            b1.Property<int?>("DepartmentId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("DepartmentId");
 
-                    b.Navigation("Semester");
+                            b1.Property<int?>("SemesterId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("SemesterId");
 
-                    b.Navigation("SeqResult");
+                            b1.Property<int>("UnivId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("UnivId");
 
-                    b.Navigation("Status");
+                            b1.Property<int>("UnivSectionId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("UnivSectionId");
 
-                    b.Navigation("Student");
+                            b1.Property<int>("Year")
+                                .HasColumnType("NUMBER(10)");
 
-                    b.Navigation("Univ");
+                            b1.HasKey("StdSeqStudyId");
 
-                    b.Navigation("UnivSection");
+                            b1.HasIndex("AdmissionId");
+
+                            b1.HasIndex("BranchId");
+
+                            b1.HasIndex("ClassId");
+
+                            b1.HasIndex("CollageId");
+
+                            b1.HasIndex("DepartmentId");
+
+                            b1.HasIndex("SemesterId");
+
+                            b1.HasIndex("UnivId");
+
+                            b1.HasIndex("UnivSectionId");
+
+                            b1.ToTable("AppStdSeqStudy");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Admission.Admission", "Admission")
+                                .WithMany()
+                                .HasForeignKey("AdmissionId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Branch", "Branch")
+                                .WithMany()
+                                .HasForeignKey("BranchId");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Class", "Class")
+                                .WithMany()
+                                .HasForeignKey("ClassId");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Collage", "Collage")
+                                .WithMany()
+                                .HasForeignKey("CollageId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Department", "Department")
+                                .WithMany()
+                                .HasForeignKey("DepartmentId");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Semester", "Semester")
+                                .WithMany()
+                                .HasForeignKey("SemesterId");
+
+                            b1.WithOwner()
+                                .HasForeignKey("StdSeqStudyId");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Univ", "Univ")
+                                .WithMany()
+                                .HasForeignKey("UnivId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.UnivSection", "UnivSection")
+                                .WithMany()
+                                .HasForeignKey("UnivSectionId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.Navigation("Admission");
+
+                            b1.Navigation("Branch");
+
+                            b1.Navigation("Class");
+
+                            b1.Navigation("Collage");
+
+                            b1.Navigation("Department");
+
+                            b1.Navigation("Semester");
+
+                            b1.Navigation("Univ");
+
+                            b1.Navigation("UnivSection");
+                        });
+
+                    b.Navigation("UniveInfo");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdSeqSum", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdSeqStudy.StdSeqSum", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Branch", "Branch")
-                        .WithMany()
-                        .HasForeignKey("BranchId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Collage", "Collage")
-                        .WithMany()
-                        .HasForeignKey("CollageId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Semester", "Semester")
-                        .WithMany()
-                        .HasForeignKey("SemesterId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.SeqResult", "SeqResult")
-                        .WithMany()
-                        .HasForeignKey("SeqResultId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.SeqStatus", "SeqStatus")
-                        .WithMany()
-                        .HasForeignKey("SeqStatusId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId");
-
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdSeqSums")
                         .HasForeignKey("StudentId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Univ", "Univ")
-                        .WithMany()
-                        .HasForeignKey("UnivId");
+                    b.OwnsOne("Univ.Hi_Student_Affairs.Domain.ValueObj.UniveInfo", "UniveInfo", b1 =>
+                        {
+                            b1.Property<Guid>("StdSeqSumId")
+                                .HasColumnType("RAW(16)");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.UnivSection", "UnivSection")
-                        .WithMany()
-                        .HasForeignKey("UnivSectionId");
+                            b1.Property<int>("AdmissionId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("AdmissionId");
 
-                    b.Navigation("Branch");
+                            b1.Property<int?>("BranchId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("BranchId");
 
-                    b.Navigation("Class");
+                            b1.Property<int?>("ClassId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("ClassId");
 
-                    b.Navigation("Collage");
+                            b1.Property<int>("CollageId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("CollageId");
 
-                    b.Navigation("Department");
+                            b1.Property<int?>("DepartmentId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("DepartmentId");
 
-                    b.Navigation("Semester");
+                            b1.Property<int?>("SemesterId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("SemesterId");
 
-                    b.Navigation("SeqResult");
+                            b1.Property<int>("UnivId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("UnivId");
 
-                    b.Navigation("SeqStatus");
+                            b1.Property<int>("UnivSectionId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("UnivSectionId");
 
-                    b.Navigation("Status");
+                            b1.Property<int>("Year")
+                                .HasColumnType("NUMBER(10)");
 
-                    b.Navigation("Student");
+                            b1.HasKey("StdSeqSumId");
 
-                    b.Navigation("Univ");
+                            b1.HasIndex("AdmissionId");
 
-                    b.Navigation("UnivSection");
+                            b1.HasIndex("BranchId");
+
+                            b1.HasIndex("ClassId");
+
+                            b1.HasIndex("CollageId");
+
+                            b1.HasIndex("DepartmentId");
+
+                            b1.HasIndex("SemesterId");
+
+                            b1.HasIndex("UnivId");
+
+                            b1.HasIndex("UnivSectionId");
+
+                            b1.ToTable("AppStdSeqSum");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Admission.Admission", "Admission")
+                                .WithMany()
+                                .HasForeignKey("AdmissionId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Branch", "Branch")
+                                .WithMany()
+                                .HasForeignKey("BranchId");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Class", "Class")
+                                .WithMany()
+                                .HasForeignKey("ClassId");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Collage", "Collage")
+                                .WithMany()
+                                .HasForeignKey("CollageId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Department", "Department")
+                                .WithMany()
+                                .HasForeignKey("DepartmentId");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Semester", "Semester")
+                                .WithMany()
+                                .HasForeignKey("SemesterId");
+
+                            b1.WithOwner()
+                                .HasForeignKey("StdSeqSumId");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Univ", "Univ")
+                                .WithMany()
+                                .HasForeignKey("UnivId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.UnivSection", "UnivSection")
+                                .WithMany()
+                                .HasForeignKey("UnivSectionId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.Navigation("Admission");
+
+                            b1.Navigation("Branch");
+
+                            b1.Navigation("Class");
+
+                            b1.Navigation("Collage");
+
+                            b1.Navigation("Department");
+
+                            b1.Navigation("Semester");
+
+                            b1.Navigation("Univ");
+
+                            b1.Navigation("UnivSection");
+                        });
+
+                    b.Navigation("UniveInfo")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdSymTransform", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdSymTransform.StdSymTransform", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdSymTransforms")
                         .HasForeignKey("StudentId");
-
-                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdSymTransformDet", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdTermination.StdTerminateStage", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.StdSymTransform", "StdSymTransform")
-                        .WithMany()
-                        .HasForeignKey("StdSymTransformId");
-
-                    b.Navigation("StdSymTransform");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdTerminateStage", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.StdTermination", "StdTermination")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdTermination.StdTermination", null)
                         .WithMany("StdTerminateStages")
                         .HasForeignKey("StdTerminationId");
-
-                    b.Navigation("StdTermination");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdTermination", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdTermination.StdTermination", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Admission", "PrevAdmission")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Admission.Admission", "PrevAdmission")
                         .WithMany()
                         .HasForeignKey("PrevAdmissionId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Semester", "Semester")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Semester", "Semester")
                         .WithMany()
                         .HasForeignKey("SemesterId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Student", "Student")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
                         .WithMany("StdTerminations")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.TerminationOrder", "TerminationOrder")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.StdTermination.TerminationOrder", "TerminationOrder")
                         .WithMany()
                         .HasForeignKey("TerminationOrderId1");
 
@@ -5575,166 +4417,332 @@ namespace Univ.Hi_Student_Affairs.Migrations
 
                     b.Navigation("Semester");
 
-                    b.Navigation("Student");
-
                     b.Navigation("TerminationOrder");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Student", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Student.Student", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Admission", "Admission")
-                        .WithMany()
-                        .HasForeignKey("AdmissionId");
+                    b.OwnsOne("Univ.Hi_Student_Affairs.Domain.ValueObj.UniveInfo", "UniveInfo", b1 =>
+                        {
+                            b1.Property<Guid>("StudentId")
+                                .HasColumnType("RAW(16)");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Branch", "Branch")
-                        .WithMany()
-                        .HasForeignKey("BranchId");
+                            b1.Property<int>("AdmissionId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("AdmissionId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.City", "CityBirth")
-                        .WithMany()
-                        .HasForeignKey("CityBirthId");
+                            b1.Property<int?>("BranchId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("BranchId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.CivilReg", "CivilReg")
-                        .WithMany()
-                        .HasForeignKey("CivilRegId1");
+                            b1.Property<int?>("ClassId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("ClassId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
+                            b1.Property<int>("CollageId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("CollageId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Collage", "Collage")
-                        .WithMany()
-                        .HasForeignKey("CollageId");
+                            b1.Property<int?>("DepartmentId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("DepartmentId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId");
+                            b1.Property<int?>("SemesterId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("SemesterId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId");
+                            b1.Property<int>("UnivId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("UnivId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.IdentifierType", "IdentifierType")
-                        .WithMany()
-                        .HasForeignKey("IdentifierTypeId");
+                            b1.Property<int>("UnivSectionId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("UnivSectionId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Jender", "Jender")
-                        .WithMany()
-                        .HasForeignKey("JenderId");
+                            b1.Property<int>("Year")
+                                .HasColumnType("NUMBER(10)");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Military", "Military")
-                        .WithMany()
-                        .HasForeignKey("MilitaryId");
+                            b1.HasKey("StudentId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Nationality", "Nationality")
-                        .WithMany()
-                        .HasForeignKey("NationalityId");
+                            b1.HasIndex("AdmissionId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Semester", "Semester")
-                        .WithMany()
-                        .HasForeignKey("SemesterId");
+                            b1.HasIndex("BranchId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId");
+                            b1.HasIndex("ClassId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.StdPhoto", "StdPhoto")
-                        .WithMany()
-                        .HasForeignKey("StdPhotoId1");
+                            b1.HasIndex("CollageId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.StudyPlan", "StudyPlan")
-                        .WithMany()
-                        .HasForeignKey("StudyPlanId");
+                            b1.HasIndex("DepartmentId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Univ", "Univ")
-                        .WithMany()
-                        .HasForeignKey("UnivId");
+                            b1.HasIndex("SemesterId");
 
-                    b.HasOne("Univ.Hi_Student_Affairs.UnivSection", "UnivSection")
-                        .WithMany()
-                        .HasForeignKey("UnivSectionId");
+                            b1.HasIndex("UnivId");
 
-                    b.Navigation("Admission");
+                            b1.HasIndex("UnivSectionId");
 
-                    b.Navigation("Branch");
+                            b1.ToTable("AppStudent");
 
-                    b.Navigation("CityBirth");
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Admission.Admission", "Admission")
+                                .WithMany()
+                                .HasForeignKey("AdmissionId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
 
-                    b.Navigation("CivilReg");
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Branch", "Branch")
+                                .WithMany()
+                                .HasForeignKey("BranchId");
 
-                    b.Navigation("Class");
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Class", "Class")
+                                .WithMany()
+                                .HasForeignKey("ClassId");
 
-                    b.Navigation("Collage");
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Collage", "Collage")
+                                .WithMany()
+                                .HasForeignKey("CollageId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
 
-                    b.Navigation("Country");
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Department", "Department")
+                                .WithMany()
+                                .HasForeignKey("DepartmentId");
 
-                    b.Navigation("Department");
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Semester", "Semester")
+                                .WithMany()
+                                .HasForeignKey("SemesterId");
 
-                    b.Navigation("IdentifierType");
+                            b1.WithOwner()
+                                .HasForeignKey("StudentId");
 
-                    b.Navigation("Jender");
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Univ", "Univ")
+                                .WithMany()
+                                .HasForeignKey("UnivId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
 
-                    b.Navigation("Military");
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.UnivSection", "UnivSection")
+                                .WithMany()
+                                .HasForeignKey("UnivSectionId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
 
-                    b.Navigation("Nationality");
+                            b1.Navigation("Admission");
 
-                    b.Navigation("Semester");
+                            b1.Navigation("Branch");
 
-                    b.Navigation("Status");
+                            b1.Navigation("Class");
 
-                    b.Navigation("StdPhoto");
+                            b1.Navigation("Collage");
 
-                    b.Navigation("StudyPlan");
+                            b1.Navigation("Department");
 
-                    b.Navigation("Univ");
+                            b1.Navigation("Semester");
 
-                    b.Navigation("UnivSection");
-                });
+                            b1.Navigation("Univ");
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StudyPlan", b =>
-                {
-                    b.HasOne("Univ.Hi_Student_Affairs.AverageCalc", "AverageCalc")
-                        .WithMany("StudyPlans")
-                        .HasForeignKey("AverageCalcId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                            b1.Navigation("UnivSection");
+                        });
+
+                    b.OwnsOne("Univ.Hi_Student_Affairs.Domain.ValueObj.StdNo", "StdNo", b1 =>
+                        {
+                            b1.Property<Guid>("StudentId")
+                                .HasColumnType("RAW(16)");
+
+                            b1.Property<decimal?>("ExamCollageId")
+                                .HasColumnType("NUMBER(20)")
+                                .HasColumnName("ExamCollageId");
+
+                            b1.Property<decimal>("StdCollageId")
+                                .HasColumnType("NUMBER(20)")
+                                .HasColumnName("StdCollageId");
+
+                            b1.Property<decimal>("StdMinistryId")
+                                .HasColumnType("NUMBER(20)")
+                                .HasColumnName("StdMinistryId");
+
+                            b1.HasKey("StudentId");
+
+                            b1.ToTable("AppStudent");
+
+                            b1.WithOwner()
+                                .HasForeignKey("StudentId");
+                        });
+
+                    b.OwnsOne("Univ.Hi_Student_Affairs.Domain.ValueObj.StudentProfile", "studnetProfile", b1 =>
+                        {
+                            b1.Property<Guid>("StudentId")
+                                .HasColumnType("RAW(16)");
+
+                            b1.Property<int?>("CountryId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("CountryId");
+
+                            b1.Property<byte[]>("Data")
+                                .HasColumnType("RAW(2000)");
+
+                            b1.Property<int?>("DayBirth")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("DayBirth");
+
+                            b1.Property<string>("FatherNameAr")
+                                .IsRequired()
+                                .HasMaxLength(250)
+                                .HasColumnType("NVARCHAR2(250)")
+                                .HasColumnName("FatherNameAr");
+
+                            b1.Property<string>("FatherNameEn")
+                                .HasMaxLength(250)
+                                .HasColumnType("NVARCHAR2(250)")
+                                .HasColumnName("FatherNameEn");
+
+                            b1.Property<string>("FirstNameAR")
+                                .IsRequired()
+                                .HasMaxLength(250)
+                                .HasColumnType("NVARCHAR2(250)")
+                                .HasColumnName("FirstNameAR");
+
+                            b1.Property<string>("FirstNameEn")
+                                .HasMaxLength(250)
+                                .HasColumnType("NVARCHAR2(250)")
+                                .HasColumnName("FirstNameEn");
+
+                            b1.Property<string>("Identifier")
+                                .HasMaxLength(250)
+                                .HasColumnType("NVARCHAR2(250)")
+                                .HasColumnName("Identifier");
+
+                            b1.Property<int?>("IdentifierTypeId")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("IdentifierTypeId");
+
+                            b1.Property<byte?>("Jender")
+                                .HasColumnType("NUMBER(3)")
+                                .HasColumnName("Jender");
+
+                            b1.Property<string>("LastNameAr")
+                                .IsRequired()
+                                .HasMaxLength(250)
+                                .HasColumnType("NVARCHAR2(250)")
+                                .HasColumnName("LastNameAr");
+
+                            b1.Property<string>("LastNameEn")
+                                .HasMaxLength(250)
+                                .HasColumnType("NVARCHAR2(250)")
+                                .HasColumnName("LastNameEn");
+
+                            b1.Property<int?>("MonthBirth")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("MonthBirth");
+
+                            b1.Property<string>("MotherNameAr")
+                                .IsRequired()
+                                .HasMaxLength(250)
+                                .HasColumnType("NVARCHAR2(250)")
+                                .HasColumnName("MotherNameAr");
+
+                            b1.Property<string>("MotherNameEn")
+                                .HasMaxLength(250)
+                                .HasColumnType("NVARCHAR2(250)")
+                                .HasColumnName("MotherNameEn");
+
+                            b1.Property<int?>("Nationality")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("Nationality");
+
+                            b1.Property<int?>("YearBirth")
+                                .HasColumnType("NUMBER(10)")
+                                .HasColumnName("YearBirth");
+
+                            b1.HasKey("StudentId");
+
+                            b1.HasIndex("CountryId");
+
+                            b1.HasIndex("IdentifierTypeId");
+
+                            b1.ToTable("AppStudent");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Country.Country", "Country")
+                                .WithMany()
+                                .HasForeignKey("CountryId");
+
+                            b1.HasOne("Univ.Hi_Student_Affairs.Domain.Student.IdentifierType", "IdentifierType")
+                                .WithMany()
+                                .HasForeignKey("IdentifierTypeId");
+
+                            b1.WithOwner()
+                                .HasForeignKey("StudentId");
+
+                            b1.Navigation("Country");
+
+                            b1.Navigation("IdentifierType");
+                        });
+
+                    b.Navigation("StdNo")
                         .IsRequired();
 
-                    b.HasOne("Univ.Hi_Student_Affairs.Collage", "Collage")
-                        .WithMany()
-                        .HasForeignKey("CollageId");
+                    b.Navigation("UniveInfo")
+                        .IsRequired();
 
-                    b.Navigation("AverageCalc");
-
-                    b.Navigation("Collage");
+                    b.Navigation("studnetProfile")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.TypeLicBranch", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.TypeLic.TypeLicBranch", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.TypeLic", "TypeLic")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.TypeLic.TypeLic", null)
                         .WithMany("TypeLicBranchs")
                         .HasForeignKey("TypeLicId");
-
-                    b.Navigation("TypeLic");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Univ", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.Branch", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.UnivType", "UnivType")
-                        .WithMany()
-                        .HasForeignKey("UnivTypeId");
-
-                    b.Navigation("UnivType");
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Department", null)
+                        .WithMany("Branchs")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.UnivSection", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.Collage", b =>
                 {
-                    b.HasOne("Univ.Hi_Student_Affairs.Univ", "Univ")
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.UnivSection", null)
+                        .WithMany("Collages")
+                        .HasForeignKey("UnivSectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.Department", b =>
+                {
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Collage", null)
+                        .WithMany("Departments")
+                        .HasForeignKey("CollageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.StudyPlan", b =>
+                {
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Collage", null)
+                        .WithMany("StudyPlans")
+                        .HasForeignKey("CollageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.UnivSection", b =>
+                {
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Univ.Univ", null)
                         .WithMany("UnivSections")
                         .HasForeignKey("UnivId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("Univ");
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdNonSyrianUniv", b =>
+                {
+                    b.HasOne("Univ.Hi_Student_Affairs.Domain.Student.Student", null)
+                        .WithMany("StdNonSyrianUnives")
+                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
@@ -5879,77 +4887,42 @@ namespace Univ.Hi_Student_Affairs.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.AdmissionKind", b =>
-                {
-                    b.Navigation("Admissions");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.AverageCalc", b =>
-                {
-                    b.Navigation("StudyPlans");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.CollType", b =>
-                {
-                    b.Navigation("Collages");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Collage", b =>
-                {
-                    b.Navigation("Departments");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Continent", b =>
-                {
-                    b.Navigation("Countries");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Country", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Country.Country", b =>
                 {
                     b.Navigation("Cities");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Department", b =>
-                {
-                    b.Navigation("Branchs");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.FeeCalcType", b =>
-                {
-                    b.Navigation("Admissions");
-                });
-
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAbsence", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAbsence.StdAbsence", b =>
                 {
                     b.Navigation("StdAbsenceStages");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdAffiliation", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdAffiliation.StdAffiliation", b =>
                 {
                     b.Navigation("StdAffiliationStages");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdPunishment", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdPunishment.StdPunishment", b =>
                 {
-                    b.Navigation("StdPunishmentStage");
+                    b.Navigation("StdPunishmentStages");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdRegistration", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdRegistration.StdRegistration", b =>
                 {
                     b.Navigation("StdRegStages");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdSeqSum", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdSeqStudy.StdSeqSum", b =>
                 {
                     b.Navigation("StdSeqStudies");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.StdTermination", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.StdTermination.StdTermination", b =>
                 {
                     b.Navigation("StdTerminateStages");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Student", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Student.Student", b =>
                 {
                     b.Navigation("StdAbsences");
 
@@ -5980,17 +4953,29 @@ namespace Univ.Hi_Student_Affairs.Migrations
                     b.Navigation("StdTerminations");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.TypeLic", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.TypeLic.TypeLic", b =>
                 {
                     b.Navigation("TypeLicBranchs");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.Univ", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.Collage", b =>
+                {
+                    b.Navigation("Departments");
+
+                    b.Navigation("StudyPlans");
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.Department", b =>
+                {
+                    b.Navigation("Branchs");
+                });
+
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.Univ", b =>
                 {
                     b.Navigation("UnivSections");
                 });
 
-            modelBuilder.Entity("Univ.Hi_Student_Affairs.UnivSection", b =>
+            modelBuilder.Entity("Univ.Hi_Student_Affairs.Domain.Univ.UnivSection", b =>
                 {
                     b.Navigation("Collages");
                 });

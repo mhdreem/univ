@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Univ.Hi_Student_Affairs
+﻿namespace Univ.Hi_Student_Affairs
 {
-   public enum AbsenceState
+    public enum AbsenceState : byte
     {
-    Pending,
-    Completed,
-    Cancelled
-}
+        Pending,
+        Completed,
+        Cancelled
+    }
 
 }

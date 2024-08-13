@@ -1,11 +1,10 @@
-﻿using System;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Class
 {
 
-    public class ClassDto :EntityDto<int>
-    {       
+    public class ClassDto : EntityDto<int>
+    {
 
         //الاسم بالعربي
         public string NameAr { get; set; }
@@ -21,7 +20,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Class
     }
 
 
-    public class CreateClassDto 
+    public class CreateClassDto
     {
 
         //الاسم بالعربي
@@ -41,13 +40,13 @@ namespace Univ.Hi_Student_Affairs.Dtos.Class
 
     public class UpdateClassDto : CreateClassDto
     {
-      public int? Id { get; set; }
+        public int? Id { get; set; }
     }
 
 
     public class CheckClassDto : EntityDto<int?>
     {
-        
+
         //الاسم بالعربي
         public string? NameAr { get; set; }
 

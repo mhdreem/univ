@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Univ.Hi_Student_Affairs.Dtos.Univ;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.CollType
 {
@@ -26,11 +20,11 @@ namespace Univ.Hi_Student_Affairs.Dtos.CollType
         public virtual string? Barcode { get; set; }
 
 
-      
+
     }
 
 
-    public class CreateCollTypeDto 
+    public class CreateCollTypeDto
     {
 
         //نوع الكلية
@@ -47,7 +41,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.CollType
         public virtual string? Barcode { get; set; }
 
 
-      
+
     }
 
 
@@ -58,7 +52,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.CollType
     }
 
 
-    public class CheckCollTypeDto 
+    public class CheckCollTypeDto
     {
         public int? Id { get; set; }
         //نوع الكلية

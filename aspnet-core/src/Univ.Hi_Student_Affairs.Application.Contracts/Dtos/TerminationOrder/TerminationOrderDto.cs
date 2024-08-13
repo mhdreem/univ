@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.TerminationOrder
 {
@@ -15,7 +14,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.TerminationOrder
         public virtual int? Ord { get; set; }
     }
 
-    public class CreateTerminationOrderDto 
+    public class CreateTerminationOrderDto
     {
         // اسم الأمر 
         public virtual string? Name { get; set; }

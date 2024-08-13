@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.SeqResult
 {
@@ -17,7 +16,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.SeqResult
 
     }
 
-    public class CreateSeqResultDto 
+    public class CreateSeqResultDto
     {
         public string? NameAr { get; set; }
 
@@ -32,9 +31,9 @@ namespace Univ.Hi_Student_Affairs.Dtos.SeqResult
     }
 
 
-    public class UpdateSeqResultDto:CreateSeqResultDto
+    public class UpdateSeqResultDto : CreateSeqResultDto
     {
-        public int? Id  { get; set; }
+        public int? Id { get; set; }
     }
 
 

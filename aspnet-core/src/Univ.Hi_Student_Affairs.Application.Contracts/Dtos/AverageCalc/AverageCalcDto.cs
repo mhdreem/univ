@@ -4,27 +4,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.AverageCalc
 {
-    public  class AverageCalcDto :  EntityDto<int>
-    {
-   
-        //نوع التقريب
-        public string? Name { get; set; }
-
-        //شرح عن نوع التقريب        
-        public string? Desc { get; set; }
-
-        public int? Ord { get; set; }
-
-        public virtual Collection<StudyPlanDto> StudyPlans { get; protected set; } //Sub collection
-
-
-     
-
-
-    }
-
-
-    public class CreateAverageCalcDto 
+    public class AverageCalcDto : EntityDto<int>
     {
 
         //نوع التقريب
@@ -44,7 +24,27 @@ namespace Univ.Hi_Student_Affairs.Dtos.AverageCalc
     }
 
 
-    public class UpdateAverageCalcDto:CreateAverageCalcDto
+    public class CreateAverageCalcDto
+    {
+
+        //نوع التقريب
+        public string? Name { get; set; }
+
+        //شرح عن نوع التقريب        
+        public string? Desc { get; set; }
+
+        public int? Ord { get; set; }
+
+        public virtual Collection<StudyPlanDto> StudyPlans { get; protected set; } //Sub collection
+
+
+
+
+
+    }
+
+
+    public class UpdateAverageCalcDto : CreateAverageCalcDto
     {
         public int? Id { get; set; }
     }
@@ -67,7 +67,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.AverageCalc
 
     public class CheckAverageCalcDto : EntityDto<int?>
     {
-        
+
         //نوع التقريب
         public string? Name { get; set; }
 

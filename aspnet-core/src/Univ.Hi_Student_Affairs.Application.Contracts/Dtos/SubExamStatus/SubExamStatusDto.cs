@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.SubExamStatus
 {
@@ -14,7 +13,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.SubExamStatus
         public int? Ord { get; set; }
     }
 
-    public class CreateSubExamStatusDto 
+    public class CreateSubExamStatusDto
     {
         //حالة المادة
 

@@ -12,13 +12,12 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.ObjectMapping;
 
 namespace Univ.Hi_Student_Affairs.Base
 {
 
     public class GenericAppService<TEntity, TEntityDto, TKey, TGetListInput, TCreateInput, TUpdateInput>
-        :CrudAppService<TEntity, TEntityDto, TKey, TGetListInput, TCreateInput, TUpdateInput>
+        : CrudAppService<TEntity, TEntityDto, TKey, TGetListInput, TCreateInput, TUpdateInput>
        where TEntity : class, IEntity<TKey>
     {
         protected GenericAppService(IRepository<TEntity, TKey> repository)
@@ -27,22 +26,34 @@ namespace Univ.Hi_Student_Affairs.Base
 
         }
 
-        
+
         public async Task<RespondDto> AllAsync()
         {
             var items = await Repository.GetListAsync();
             RespondDto RespondDto = new RespondDto();
             RespondDto.IsSuccess = true;
-            RespondDto.Result= items;
+            RespondDto.Result = items;
             return RespondDto;
         }
 
 
-        
+        public async Task<RespondDto> GetByIdAsync(TKey id)
+        {
+            var items = await Repository.FindAsync(id, true);
+            RespondDto RespondDto = new RespondDto();
+            RespondDto.IsSuccess = true;
+            RespondDto.Result = items;
+            return RespondDto;
+        }
+
+
+
         [HttpPost]
         public async Task<RespondDto> FilterAsync(CustomePagedAndSortedResultRequestDto input)
         {
-           
+            try
+            {
+
                 var query = await Repository.GetQueryableAsync();
 
                 // Apply filtering
@@ -86,13 +97,20 @@ namespace Univ.Hi_Student_Affairs.Base
                 //Get the total count with another query (required for the paging)
                 var totalCount = await Repository.GetCountAsync();
                 RespondDto respondDto = new RespondDto();
-            respondDto.IsSuccess =true;
+                respondDto.IsSuccess = true;
                 respondDto.Result = new PagedResultDto<TEntityDto>(
                     totalCount, bookDtos);
 
                 return respondDto;
-           
-        
+
+
+
+            }
+            catch (Exception ex) { }
+
+
+            return new RespondDto();
+
         }
 
     }

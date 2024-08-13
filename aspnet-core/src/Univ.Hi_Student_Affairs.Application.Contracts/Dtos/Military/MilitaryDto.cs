@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Military
 {
@@ -15,7 +14,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Military
 
     }
 
-    public class CreateMilitaryDto 
+    public class CreateMilitaryDto
     {
         public string? Name { get; set; }
         public int? CityId { get; set; }

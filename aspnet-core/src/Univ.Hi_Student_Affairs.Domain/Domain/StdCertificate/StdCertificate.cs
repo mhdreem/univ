@@ -1,76 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
 
-namespace Univ.Hi_Student_Affairs
+namespace Univ.Hi_Student_Affairs.Domain.StdCertificate
 {
     public class StdCertificate : FullAuditedAggregateRoot<Guid>
     {
         [ForeignKey("StudentId")]
-        public Guid? StudentId { get; set; }
-        public virtual Student? Student { get; set; }
+        public Guid? StudentId { get; private set; }
+
 
 
 
 
         [ForeignKey("CountryId")]
-        public int? CountryId { get; set; }
-        public virtual Country? Country { get; set; }
+        public int? CountryId { get; private set; }
+        public virtual Country.Country? Country { get; private set; }
 
 
 
         [ForeignKey("CityId")]
-        public int? CityId { get; set; }
-        public virtual City? City { get; set; }
+        public int? CityId { get; private set; }
+        public virtual Country.City? City { get; private set; }
 
 
         [ForeignKey("TypeLicId")]
-        public int? TypeLicId { get; set; }
-        public virtual TypeLic? TypeLic { get; set; }
+        public int? TypeLicId { get; private set; }
+
 
 
 
         [ForeignKey("TypeLicBranchId")]
-        public int? TypeLicBranchId { get; set; }
-        public virtual TypeLicBranch? TypeLicBranch { get; set; }
+        public int? TypeLicBranchId { get; private set; }
+
 
 
         //عام الشهادة
-        public int? Year { get; set; }
+        public int? Year { get; private set; }
 
         //طالب محلي
-        public bool? ForeignCert { get; set; }
+        public bool? ForeignCert { get; private set; }
 
         //صحة المعلومات
-        public bool? IsForeignCertCorrect { get; set; }
+        public bool? IsForeignCertCorrect { get; private set; }
 
         //تصحيح الشهادة
-        public string? ForeignCertCorrect { get; set; }
+        public string? ForeignCertCorrect { get; private set; }
 
 
 
 
         //رقم الاكتتاب
-        public string? No { get; set; }
+        public string? No { get; private set; }
 
 
 
         //الترتيب
-        public int Ord { get; set; }
+        public int Ord { get; private set; }
 
 
         //ملاحظات
-        public string? Note { get; set; }
+        public string? Note { get; private set; }
 
 
-        public uint? TotalMark { get; set; }
+        public uint? TotalMark { get; private set; }
 
-        public uint? TotalNet { get; set; }
+        public uint? TotalNet { get; private set; }
 
 
 

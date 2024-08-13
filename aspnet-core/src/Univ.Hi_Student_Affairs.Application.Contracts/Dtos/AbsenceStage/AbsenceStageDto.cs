@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.AbsenceStage
 {
@@ -14,7 +11,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.AbsenceStage
         public int? Ord { get; set; }
     }
 
-    public class CreateAbsenceStageDto 
+    public class CreateAbsenceStageDto
     {
         public string? Name { get; set; }
 
@@ -26,7 +23,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.AbsenceStage
 
     public class UpdateAbsenceStageDto : CreateAbsenceStageDto
     {
-        public int Id { get; set; }    
+        public int Id { get; set; }
     }
 
     public class CheckAbsenceStageDto : EntityDto<int?>

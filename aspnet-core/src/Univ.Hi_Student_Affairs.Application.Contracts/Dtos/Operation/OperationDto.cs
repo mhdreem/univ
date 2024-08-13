@@ -1,17 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Operation
 {
     public class OperationDto : EntityDto<int>
     {
-        
+
         public virtual string? Name { get; set; }
 
 
     }
 
-    public class CreateOperationDto 
+    public class CreateOperationDto
     {
 
         public virtual string? Name { get; set; }
@@ -19,7 +18,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Operation
 
     }
 
-    public class UpdateOperationDto:CreateOperationDto
+    public class UpdateOperationDto : CreateOperationDto
     {
 
         public int Id { get; set; }

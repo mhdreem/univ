@@ -10,13 +10,13 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdAdmission
     public class StdAdmissionDto : FullAuditedEntityDto<Guid>
     {
 
-       
+
         public Guid? StudentId { get; set; }
         public virtual StudentDto? Student { get; set; }
 
 
 
-       
+
         public int? AdmissionID { get; set; }
         public virtual AdmissionDto? Admission { get; set; }
 
@@ -48,7 +48,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.StdAdmission
 
 
         //لغة التفاضيل
-       
+
         public int? AdmissionLanguageId { get; set; }
         public virtual LanguageDto? AdmissionLanguage { get; set; }
 

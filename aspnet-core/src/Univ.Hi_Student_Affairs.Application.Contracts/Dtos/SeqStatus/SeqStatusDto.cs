@@ -19,7 +19,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.SeqStatus
         public int? Ord { get; set; }
     }
 
-    public class CreateSeqStatusDto 
+    public class CreateSeqStatusDto
     {
 
         //حالة الطالب
@@ -39,7 +39,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.SeqStatus
     public class UpdateSeqStatusDto : CreateSeqStatusDto
     {
 
-       public int Id { get; set; }
+        public int Id { get; set; }
     }
 
 

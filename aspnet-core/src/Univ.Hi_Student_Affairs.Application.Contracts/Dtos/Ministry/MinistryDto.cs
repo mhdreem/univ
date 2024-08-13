@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.Ministry
 {
@@ -10,7 +9,7 @@ namespace Univ.Hi_Student_Affairs.Dtos.Ministry
     }
 
 
-    public class CreateMinistryDto 
+    public class CreateMinistryDto
     {
         public string NameAr { get; set; }
         public string? NameEn { get; set; }

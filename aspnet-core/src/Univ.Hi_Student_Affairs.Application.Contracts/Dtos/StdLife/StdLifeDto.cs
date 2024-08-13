@@ -4,7 +4,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace Univ.Hi_Student_Affairs.Dtos.StdLife
 {
-    public class StdLifeDto :FullAuditedEntityDto<Guid>
+    public class StdLifeDto : FullAuditedEntityDto<Guid>
     {
 
         public int? OperationId { get; set; }
